@@ -19,9 +19,13 @@
     "target": "es2022",
     "module": "es2020",
     "lib": [
-      "es2018", 
+      "es2018",
       "dom"
     ],
+    "paths": {
+      "@app/shared": ["src/app/shared/index.ts"],
+      "@app/login-store": ["src/app/login/index.ts"],
+    },
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {

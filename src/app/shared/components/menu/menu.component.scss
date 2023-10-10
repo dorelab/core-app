@@ -1,0 +1,20 @@
+::ng-deep ion-menu.menu-principal.md {
+    ion-content {
+        height: 100vh;
+        ion-list {
+            padding: 0;
+        }
+        .lista-menu-principal {
+            ion-item {
+                color: #FFFFFF;
+                --min-height: 3.5rem;
+                --ion-font-family: 'Mulish-Regular';
+            }
+            ion-item.selected {
+                border-left: 3px solid #E84910;
+                --background: #1f4a69;
+                --ion-font-family: 'Mulish-Bold';
+            }
+        }
+    }
+}

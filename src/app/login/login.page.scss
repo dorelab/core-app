@@ -1,0 +1,45 @@
+.grid-login {
+    .img-logo-gs {
+        width: 200px;
+    }
+    .img-logo-core {
+        width: 100px;
+    }
+}
+
+.btn-login {
+    --width: 80%;
+}
+
+.img-login {
+    max-width: 200px;
+}
+
+.box-profile {
+    border: 1px solid #DEE2E6;
+    border-radius: 12px;
+    padding: 10px;
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    img {
+        width: 200px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+}
+
+.box-profile:hover {
+    background-color: #dee2e68a;
+}
+
+.selected-profile {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media (max-width: 1199px) {
+    .img-login {
+        max-width: 175px;
+    }
+}

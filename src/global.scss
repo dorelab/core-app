@@ -9,18 +9,85 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
+
 /* Core CSS required for Ionic components to work properly */
+
 @import "@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
+
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import '@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
+
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+@import "theme/variables.scss";
+
+/* GLOBALS FONTS */
+
+@font-face {
+    font-family: "Mulish-Light";
+    src: url("/assets/fonts/Mulish-Light.woff") format("woff");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Mulish-Medium";
+    src: url("/assets/fonts/Mulish-Medium.woff") format("woff");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Mulish-Regular";
+    src: url("/assets/fonts/Mulish-Regular.woff") format("woff");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Mulish-Black";
+    src: url("/assets/fonts/Mulish-Black.woff") format("woff");
+}
+
+@font-face {
+    font-family: "Mulish-SemiBold";
+    src: url("/assets/fonts/Mulish-SemiBold.woff") format("woff");
+}
+
+@font-face {
+    font-family: "Mulish-Bold";
+    src: url("/assets/fonts/Mulish-Bold.woff") format("woff");
+}
+
+body {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+
+/* GLOBALS CLASS */
+
+.bg-primary-core {
+    background-color: var(--ion-color-primary) !important;
+}
+
+.card-content-md {
+    font-size: 16px;
+}
+
+.content-principal {
+    background-color: #F7F8FC;
+    .titulo-modulo {
+        font-size: 20px;
+    }
+}
+
+ion-button {
+    text-transform: initial;
+}

@@ -1,0 +1,105 @@
+<ion-header class="header-principal">
+    <ion-toolbar class="py-3">
+        <ion-buttons slot="start">
+            <ion-menu-button class="notificacion me-2"></ion-menu-button>
+            <img class="img-logo-gs mx-3" src="../../assets/images/gs_logo.png" />
+            <img class="img-logo-core mx-3" src="../../assets/images/core_logo.svg" />
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+            <ion-button mat-button [matMenuTriggerFor]="menuNotifications" class="notificacion">
+                <ion-badge color="primary" *ngIf="countNotifications > 0"></ion-badge>
+                <ion-icon name="notifications"></ion-icon>
+            </ion-button>
+
+            <ion-button mat-button [matMenuTriggerFor]="menuUsuario">
+                <ion-chip class="perfil">
+                    <ion-label class="ion-text-capitalize ion-text-left nombre-asesor">
+                        {{ userLogin?.nombre !== "" ? userLogin?.nombre : "Usuario" }} {{ userLogin?.apellido }}
+                    </ion-label>
+                    <ion-avatar>
+                        <ion-icon name="person"></ion-icon>
+                    </ion-avatar>
+                </ion-chip>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<!-- OPCIONES USUARIO -->
+<mat-menu #menuUsuario="matMenu">
+    <button mat-menu-item routerLink="/dashboard/cambiar-clave">
+    Cambiar Contraseña
+    <mat-icon>lock</mat-icon>
+  </button>
+    <button *ngIf="this.userLogin?.perfil !== 1" mat-menu-item (click)="routerEdit(this.userLogin?.perfil!,this.userLogin?.usuario_id!)">
+    Editar perfil
+    <mat-icon>edit</mat-icon>
+  </button>
+    <button mat-menu-item (click)="cerrarSessionUser()">
+    Cerrar Sesion
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+</mat-menu>
+
+<!-- NOTIFICACIONES USUARIO -->
+<mat-menu #menuNotifications="matMenu" class="menuNotifications" xPosition="before">
+    <!-- <div class="w-100 d-flex justify-content-end pb-3 pe-3 pt-1">
+    <mat-slide-toggle [(ngModel)]="vista" (click)="changeToggle($event)"
+      >Mostrar las Leídas</mat-slide-toggle
+    >
+  </div>
+
+  <button
+    mat-menu-item
+    *ngFor="let notificacion of (notificaciones$ | async)?.results"
+    class="px-2"
+  >
+    <ion-grid>
+      <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-col size="1.5" class="ion-text-center ion-align-self-start pt-2">
+          <mat-icon
+            class="alert-notification mr-0 texto-verde"
+            *ngIf="!notificacion.vista"
+            >notifications_active</mat-icon
+          >
+        </ion-col>
+        <ion-col
+          size="9"
+          class="col-text-notificacion"
+          [ngClass]="{ 'fw-bold': !notificacion.vista }"
+        >
+          <ion-label class="d-inline-block texto-notificacion w-100">
+            {{ notificacion.mensaje }}
+          </ion-label>
+          <ion-label class="d-inline-block fecha-notificacion w-100">
+            {{ notificacion.fecha | date : "dd/MM/YYYY" }},
+            {{ notificacion.fecha | date : "hh:mm a" }}
+          </ion-label>
+        </ion-col>
+        <ion-col size="1.5" class="ion-text-center">
+          <mat-icon
+            class="alert-notification-read mr-0"
+            [matTooltip]="!notificacion.vista ? 'Marcar como Leído' : ''"
+            [ngClass]="{ 'texto-verde': !notificacion.vista }"
+            (click)="
+              !notificacion.vista
+                ? marcarLeido(notificacion, $event)
+                : $event.stopPropagation()
+            "
+            >done_all</mat-icon
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </button>
+  <mat-paginator
+    class="paginator-notificaciones"
+    [length]="(notificaciones$ | async)?.count"
+    [pageSize]="10"
+    [showFirstLastButtons]="false"
+    [hidePageSize]="true"
+    (page)="onPaginateChange($event)"
+    (click)="$event.stopPropagation()"
+  ></mat-paginator> -->
+</mat-menu>

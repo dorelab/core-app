@@ -1,0 +1,38 @@
+<ion-content class="content-principal ion-padding content-home">
+    <ion-grid class="custom_container">
+        <ion-row>
+            <ion-col size="12" class="titulo-modulo">
+                Home
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" class="nombre-usuario">
+                Bienvenido
+                <br /> {{ infoUser.nombre }}
+            </ion-col>
+            <ion-col size="12" class="ultima-conexion">
+                {{ infoUser.last_login | date:'d MMM y, h:mm:ss a' }}
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="my-2" *ngFor="let item of botones">
+                <ion-button *ngIf="item.id !== 1" color="secondary" class="boton-home" expand="block" [routerLink]="item.url">{{ item.title }}</ion-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="px-2">
+                <div class="w-100 p-3 ratio ratio-16x9 content-video mx-auto my-5">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Qf_7mEPMIAc" allowfullscreen></iframe>
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="my-2 px-5" *ngFor="let logo of logos">
+                <img class="img-logo-home w-100" [src]="'../../assets/images/home/' + logo" />
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
