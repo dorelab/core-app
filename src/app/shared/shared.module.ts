@@ -8,6 +8,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { CalendarioComponent } from './components/calendario/calendario.component';
 
 // Interceptors
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
@@ -39,6 +40,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { FullCalendarModule } from '@fullcalendar/angular';
+
 
 registerLocaleData(localeEs)
 
@@ -46,7 +49,8 @@ registerLocaleData(localeEs)
   declarations: [
     HeaderComponent,
     MenuComponent,
-    LoaderComponent
+    LoaderComponent,
+    CalendarioComponent
   ],
   imports: [
     CommonModule,
@@ -72,12 +76,14 @@ registerLocaleData(localeEs)
     MatSlideToggleModule,
     MatBadgeModule,
     MatTabsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FullCalendarModule
   ],
   exports: [
     HeaderComponent,
     MenuComponent,
     LoaderComponent,
+    CalendarioComponent,
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
@@ -95,7 +101,8 @@ registerLocaleData(localeEs)
     MatSlideToggleModule,
     MatExpansionModule,
     MatBadgeModule,
-    MatTabsModule
+    MatTabsModule,
+    FullCalendarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

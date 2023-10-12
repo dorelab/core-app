@@ -1,0 +1,15 @@
+::ng-deep .content-sesion-privada {
+    ion-breadcrumb {
+        .breadcrumb-native {
+            padding-inline: 0 !important;
+        }
+    }
+    mat-calendar {
+        max-width: 320px;
+        margin: 0 auto;
+        .mdc-button__label span {
+            font-size: 1.8rem;
+            color: #626262;
+        }
+    }
+}

@@ -16,7 +16,7 @@ export const MAIN_MENU: ItemMenu[] = [
     title: 'Calendarización',
     icon: 'fa-solid fa-calendar-days',
     moduloBack: 'calendarizacion',
-    url: '/scheduling'
+    url: '/calendarizacion'
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ export const MAIN_MENU: ItemMenu[] = [
     title: 'Solicitudes',
     icon: 'fa-solid fa-file-circle-check',
     moduloBack: 'solicitudes',
-    url: '/requests'
+    url: '/solicitudes'
   },
   {
     id: 4,
@@ -32,6 +32,6 @@ export const MAIN_MENU: ItemMenu[] = [
     title: 'Alertas',
     icon: 'fa-solid fa-bell',
     moduloBack: 'alertas',
-    url: '/alerts'
+    url: '/alertas'
   }
 ];

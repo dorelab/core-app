@@ -82,7 +82,7 @@ body {
 }
 
 .content-principal {
-    background-color: #F7F8FC;
+    --background: #F7F8FC;
     .titulo-modulo {
         font-size: 20px;
     }
@@ -90,4 +90,8 @@ body {
 
 ion-button {
     text-transform: initial;
+}
+
+.breadcrumb-native {
+    padding-inline: 0 !important;
 }

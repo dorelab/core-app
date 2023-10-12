@@ -17,9 +17,19 @@ const routes: Routes = [
         path: 'home',
         loadChildren: () =>
           import('./home/home.module').then((m) => m.HomePageModule),
+      },
+      {
+        path: 'calendarizacion',
+        loadChildren: () =>
+          import('./calendarizacion/calendarizacion.module').then((m) => m.CalendarizacionPageModule),
+      },
+      {
+        path: 'sesion',
+        loadChildren: () =>
+          import('./sesion/sesion.module').then((m) => m.SesionPageModule),
       }
     ],
-  },
+  }
 ];
 
 @NgModule({

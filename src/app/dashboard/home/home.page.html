@@ -17,7 +17,7 @@
 
         <ion-row>
             <ion-col size="12" class="my-2" *ngFor="let item of botones">
-                <ion-button *ngIf="item.id !== 1" color="secondary" class="boton-home" expand="block" [routerLink]="item.url">{{ item.title }}</ion-button>
+                <ion-button *ngIf="item.id !== 1" color="secondary" class="boton-home" expand="block" [routerLink]="'/dashboard' + item.url">{{ item.title }}</ion-button>
             </ion-col>
         </ion-row>
 

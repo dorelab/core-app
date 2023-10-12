@@ -1,0 +1,41 @@
+<ion-content class="content-principal ion-padding content-sesion-privada">
+    <ion-grid class="custom_container">
+        <ion-row>
+            <ion-col size="12" class="titulo-modulo">
+                Calendarización
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12" class="pt-4 pb-4">
+                <ion-breadcrumbs mode="ios" class="ion-no-padding">
+                    <ion-breadcrumb [routerLink]="'/dashboard/calendarizacion/'">Agenda</ion-breadcrumb>
+                    <ion-breadcrumb [routerLink]="'/dashboard/sesion/'">Sesión Privada</ion-breadcrumb>
+                </ion-breadcrumbs>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="titulo-modulo text-uppercase">
+                Sesión Privada
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="px-2">
+                <mat-calendar [selected]="selectedDate" (selectedChange)="selectedDate = $event"></mat-calendar>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="titulo-modulo pt-4">
+                NUEVA SESIÓN PRIVADA
+            </ion-col>
+            <ion-col size="12" class="pb-4">
+                <ion-button color="primary">
+                    <ion-icon slot="icon-only" name="add" class="px-5"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,15 @@
+::ng-deep .calendario-full {
+    .fc-toolbar.fc-header-toolbar {
+        display: inline !important;
+        text-align: center;
+        margin-bottom: 1rem;
+        .fc-toolbar-chunk {
+            width: 100%;
+            margin: 1rem 0;
+        }
+        .fc-toolbar-title {
+            font-size: 1em;
+            text-transform: uppercase;
+        }
+    }
+}
