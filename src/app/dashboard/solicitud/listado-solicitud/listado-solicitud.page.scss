@@ -1,0 +1,45 @@
+::ng-deep .content-solicitudes {
+    ion-breadcrumb {
+        .breadcrumb-native {
+            padding-inline: 0 !important;
+        }
+    }
+    ion-card.card-list {
+        --color: #252733;
+        ion-row {
+            ion-col {
+                border: 1px solid #EAECF0;
+                min-height: 50px;
+                display: flex;
+                align-items: center;
+                padding: 0.5rem 0.8rem;
+            }
+        }
+    }
+    .custom-tags {
+        border: 1px solid;
+        width: 30px;
+        border-radius: 50%;
+        height: 30px;
+        &.AMARILLO {
+            background-color: #EEF213;
+            border-color: #EEF213;
+        }
+        &.VERDE {
+            background-color: #3DAB63;
+            border-color: #3DAB63;
+        }
+        &.ROJO {
+            background-color: #F81414;
+            border-color: #F81414;
+        }
+    }
+    .titulo-solicitud {
+        font-weight: bold;
+        background-color: #EDF5F5;
+    }
+    .detalle-solicitud {
+        background-color: #FFFFFF;
+        font-family: 'Mulish-Regular';
+    }
+}

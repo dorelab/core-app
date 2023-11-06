@@ -7,7 +7,7 @@ export class Sesion {
   hora_fin?: string;
   tipo?: number;
   subtipo?: number;
-  asistentes?: number[];
+  convocados?: number[];
   invitacion?: string;
 
   constructor( obj: Sesion = {} ){
@@ -17,7 +17,7 @@ export class Sesion {
     this.hora_fin = obj?.hora_fin;
     this.tipo = obj?.tipo;
     this.subtipo = obj?.subtipo;
-    this.asistentes = obj?.asistentes;
+    this.convocados = obj?.convocados;
     this.invitacion = obj?.invitacion;
   }
 
@@ -26,7 +26,7 @@ export class Sesion {
         fecha: new FormControl(p.fecha, [Validators.required]),
         hora_inicio: new FormControl(p.hora_inicio, [Validators.required]),
         hora_fin: new FormControl(p.hora_fin, [Validators.required, Validators.minLength(3)]),
-        asistentes: new FormControl(p.asistentes, [Validators.required]),
+        convocados: new FormControl(p.convocados, [Validators.required]),
         invitacion: new FormControl(p.invitacion, [Validators.required])
       });
   }

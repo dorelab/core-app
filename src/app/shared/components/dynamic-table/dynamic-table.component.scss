@@ -1,0 +1,71 @@
+.table-container {
+  position: relative;
+}
+
+.box-table-container {
+  position: relative;
+  // min-height: 200px;
+  // max-height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-mdc-table .mdc-data-table__header-row {
+  background-color: rgba(120, 174, 177, 0.15);
+}
+
+.mat-mdc-table .mat-mdc-header-cell {
+  color: #000000;
+  font: normal normal 600 12px/19px Poppins-Regular;
+}
+
+.mat-mdc-unelevated-button.mat-primary {
+  --mdc-filled-button-container-color: #278A2A;
+  --mdc-filled-button-label-text-color: #fff;
+}
+
+.mat-row-not-data td {
+  padding: 32px;
+  text-align: center;
+  color: #00000031;
+}
+
+.mdc-button{
+  border-radius: 8px !important; 
+ 
+}
+
+.mdc-fab{
+  border-radius: 8px !important;
+}
+
+.mat-mdc-progress-bar{
+  --mdc-linear-progress-active-indicator-color:#155724
+}
+
+.custom-tags {
+  // color: #278A2A;
+  border: 1px solid;
+  width: 110px;
+  text-align: center;
+  border-radius: 4px;
+  padding: 2px 5px;
+  margin-left: 5px;
+  font-weight: 600;
+}

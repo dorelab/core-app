@@ -9,6 +9,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
+import { DynamicListComponent } from './components/dynamic-list/dynamic-list.component';
+import { DynamicFilterComponent } from './components/dynamic-filter/dynamic-filter.component';
+import { DynamicPageResultComponent } from './components/dynamic-page-result/dynamic-page-result.component';
+import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
+
+// DIRECTIVES
+import { ColorStatusDirective } from './directives/color-status.directive';
 
 // Interceptors
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
@@ -32,6 +39,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatListModule } from '@angular/material/list';
 import localeEs from '@angular/common/locales/es-CL';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -41,6 +49,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 registerLocaleData(localeEs)
@@ -50,7 +59,12 @@ registerLocaleData(localeEs)
     HeaderComponent,
     MenuComponent,
     LoaderComponent,
-    CalendarioComponent
+    CalendarioComponent,
+    DynamicFilterComponent,
+    DynamicPageResultComponent,
+    DynamicTableComponent,
+    DynamicListComponent,
+    ColorStatusDirective
   ],
   imports: [
     CommonModule,
@@ -77,6 +91,8 @@ registerLocaleData(localeEs)
     MatBadgeModule,
     MatTabsModule,
     MatExpansionModule,
+    MatListModule,
+    MatFormFieldModule,
     FullCalendarModule
   ],
   exports: [
@@ -84,6 +100,10 @@ registerLocaleData(localeEs)
     MenuComponent,
     LoaderComponent,
     CalendarioComponent,
+    DynamicFilterComponent,
+    DynamicPageResultComponent,
+    DynamicTableComponent,
+    DynamicListComponent,
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
@@ -102,7 +122,10 @@ registerLocaleData(localeEs)
     MatExpansionModule,
     MatBadgeModule,
     MatTabsModule,
-    FullCalendarModule
+    MatListModule,
+    MatFormFieldModule,
+    FullCalendarModule,
+    ColorStatusDirective
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

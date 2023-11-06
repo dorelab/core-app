@@ -95,3 +95,13 @@ ion-button {
 .breadcrumb-native {
     padding-inline: 0 !important;
 }
+
+.sc-ion-input-md-h:not(.legacy-input),
+ion-select.select-fill-outline:not(.legacy-select) {
+    min-height: 46px;
+    --background: #FFFFFF;
+}
+
+.sc-ion-textarea-md-h:not(.legacy-textarea) {
+    --background: #FFF;
+}

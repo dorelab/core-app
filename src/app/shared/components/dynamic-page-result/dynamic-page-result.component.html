@@ -1,0 +1,20 @@
+<ion-grid>
+    <ion-row class="ion-justify-content-center ion-align-items-center ion-text-center p-5">
+        <ion-col size="12" class="my-4">
+            <div class="mx-auto circulo-finalizado">
+                <ion-icon [name]="icon"></ion-icon>
+            </div>
+        </ion-col>
+        <ion-col size="12" class="titulo texto-finalizado my-4">
+            {{ title }}
+        </ion-col>
+        <ion-col size="12" class="subtitulo texto-finalizado my-4">
+            {{ subTitle }}
+        </ion-col>
+        <ion-col size="12 mt-5" *ngIf="isShowButton">
+            <ion-button color="secondary" (click)="onClickBtn.emit()">
+                {{ buttonLabel }}
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>

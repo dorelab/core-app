@@ -58,7 +58,8 @@ export class CalendarioComponent {
       weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
     },
     events: [
-      { title: 'event 1', date: '2023-10-12' },
+      { title: 'event 1', date: '2023-10-12T12:30:00' },
+      { title: 'event 1.2', date: '2023-10-12T14:00:00' },
       { title: 'event 2', date: '2023-10-13' },
     ],
     height: '600px'

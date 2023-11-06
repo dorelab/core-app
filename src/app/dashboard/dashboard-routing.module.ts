@@ -27,9 +27,19 @@ const routes: Routes = [
         path: 'sesion',
         loadChildren: () =>
           import('./sesion/sesion.module').then((m) => m.SesionPageModule),
+      },
+      {
+        path: 'solicitud',
+        loadChildren: () =>
+          import('./solicitud/solicitud.module').then((m) => m.SolicitudPageModule),
       }
     ],
+  },
+  {
+    path: 'solicitud',
+    loadChildren: () => import('./solicitud/solicitud.module').then( m => m.SolicitudPageModule)
   }
+
 ];
 
 @NgModule({

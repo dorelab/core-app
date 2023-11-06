@@ -1,0 +1,106 @@
+<ion-content class="content-principal ion-padding content-solicitudes">
+    <ion-grid class="custom_container">
+        <ion-row>
+            <ion-col size="12" class="titulo-modulo">
+                Solicitudes
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="pt-4 pb-4">
+                <ion-breadcrumbs mode="ios" class="ion-no-padding">
+                    <ion-breadcrumb [routerLink]="'/dashboard/solicitud/crear'">Crear Solicitud</ion-breadcrumb>
+                    <ion-breadcrumb [routerLink]="'/dashboard/listado/'">Solicitudes</ion-breadcrumb>
+                </ion-breadcrumbs>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="titulo-modulo">
+                Solicitudes Vigentes
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="ion-no-padding mb-4">
+                <form-filters-list [idUserLogin]="this.infoUser.usuario_id" (onFilter)="getListRequest($event)"></form-filters-list>
+            </ion-col>
+        </ion-row>
+
+        <!-- <ion-row *ngFor="let request of RequestList">
+            <ion-col size="6" class="titulo-solicitud">
+                Solicitante
+            </ion-col>
+            <ion-col size="6" class="titulo-solicitud">
+                Tipo de Solicitud
+            </ion-col>
+            <ion-col size="6" class="detalle-solicitud">
+                {{ request.consejero_nombre}}
+            </ion-col>
+            <ion-col size="6" class="detalle-solicitud">
+                {{ request.tipo}}
+            </ion-col>
+        </ion-row> -->
+
+        <ng-container [ngTemplateOutlet]="templateRequest" [ngTemplateOutletContext]="{request: {}, tipo: 'activo'}"></ng-container>
+    </ion-grid>
+</ion-content>
+
+<ng-template #templateRequest let-request='request' let-tipo='tipo'>
+    <ion-card class="card-list">
+        <ion-card-content class="ion-no-padding">
+            <ion-row>
+                <ion-col size="6" class="titulo-solicitud">
+                    Solicitante
+                </ion-col>
+                <ion-col size="6" class="titulo-solicitud">
+                    Tipo de Solicitud
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6" class="detalle-solicitud">
+                    Dorela Carrasquel
+                </ion-col>
+                <ion-col size="6" class="detalle-solicitud">
+                    Tipo de Solicitud
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="6" class="titulo-solicitud">
+                    Fecha Solicitud
+                </ion-col>
+                <ion-col size="6" class="titulo-solicitud">
+                    {{ tipo === 'activo' ? 'Fecha Límite' : 'Ver Solicitud'}}
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6" class="detalle-solicitud">
+                    21/04/2023
+                </ion-col>
+                <ion-col size="6" class="detalle-solicitud" *ngIf="tipo === 'activo'">
+                    <span>30/04/2023</span>
+                    <div [class]="'AMARILLO'" class="ms-4 custom-tags"></div>
+                </ion-col>
+                <ng-container *ngIf="tipo !== 'activo'" [ngTemplateOutlet]="btnVer" [ngTemplateOutletContext]="{request: {}, tipo: tipo}"></ng-container>
+            </ion-row>
+
+            <ion-row *ngIf="tipo === 'activo'">
+                <ion-col size="12" class="titulo-solicitud">
+                    Ver Solicitud
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="tipo === 'activo'">
+                <ng-container [ngTemplateOutlet]="btnVer" [ngTemplateOutletContext]="{request: {}, tipo: tipo}"></ng-container>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+</ng-template>
+
+<ng-template #btnVer let-request='request' let-tipo='tipo'>
+    <ion-col [size]="tipo === 'activo' ? 12 : 6" class="detalle-solicitud text-center">
+        <ion-button color="primary">
+            Ver
+        </ion-button>
+    </ion-col>
+</ng-template>

@@ -1,0 +1,23 @@
+<ion-card>
+    <ion-card-header *ngIf="header">
+        <ion-card-subtitle>{{ header }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+        <ion-grid class="custom_container">
+            <ion-row>
+                <ion-col size="9">
+                    <ion-input fill="outline" placeholder="Buscar..." [(ngModel)]="query"></ion-input>
+                </ion-col>
+                <ion-col size="3" class="ion-text-center">
+                    <ion-button *ngIf="!isFilter" color="secondary" class="w-100" (click)="search()" [disabled]="!query">
+                        Buscar
+                    </ion-button>
+                    <ion-button *ngIf="isFilter" color="primary" class="w-100" (click)="clearSearch()">
+                        Limpiar
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card-content>
+</ion-card>

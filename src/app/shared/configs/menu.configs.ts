@@ -24,7 +24,7 @@ export const MAIN_MENU: ItemMenu[] = [
     title: 'Solicitudes',
     icon: 'fa-solid fa-file-circle-check',
     moduloBack: 'solicitudes',
-    url: '/solicitudes'
+    url: '/solicitud'
   },
   {
     id: 4,
