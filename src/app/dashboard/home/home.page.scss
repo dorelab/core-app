@@ -15,4 +15,10 @@
     }
 }
 
-@media only screen and (max-width: 576px) {}
+@media (max-width: 576px) {
+    .content-home {
+        .nombre-usuario {
+            font-size: 1.3rem;
+        }
+    }
+}

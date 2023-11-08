@@ -3,19 +3,19 @@
         <form [formGroup]="formFilter">
             <ion-row class="row-form ion-justify-content-center ion-align-items-center">
                 <ion-col size="12">
-                    <ion-label position="stacked" class="text-uppercase">Tipo de Solicitud</ion-label>
+                    <ion-label position="stacked">Tipo de Solicitud</ion-label>
                     <ion-select formControlName="tipo" label-placement="stacked" fill="outline">
                         <ion-select-option *ngFor="let item of listTypesRequest" [value]="item.id">{{ item.nombre }}</ion-select-option>
                     </ion-select>
                 </ion-col>
 
                 <ion-col size="12">
-                    <ion-label position="stacked" class="text-uppercase">Palabra Clave</ion-label>
+                    <ion-label position="stacked">Palabra Clave</ion-label>
                     <ion-input type="text" formControlName="search" fill="outline"></ion-input>
                 </ion-col>
 
                 <ion-col size="12">
-                    <ion-label position="stacked" class="text-uppercase">Fecha</ion-label>
+                    <ion-label position="stacked">Fecha</ion-label>
                     <mat-form-field class="w-100" appearance="outline">
                         <mat-date-range-input [formGroup]="datesRange" [rangePicker]="rangePicker" [comparisonStart]="datesRange.value.start" [comparisonEnd]="datesRange.value.end">
                             <input matStartDate placeholder="Inicio" formControlName="start">

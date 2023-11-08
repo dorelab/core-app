@@ -16,7 +16,7 @@
         </ion-row>
 
         <ion-row>
-            <ion-col size="12" class="titulo-modulo">
+            <ion-col size="12" class="subtitulo-modulo">
                 Solicitudes Vigentes
             </ion-col>
         </ion-row>
@@ -30,7 +30,7 @@
         <ng-container [ngTemplateOutlet]="templateRequest" [ngTemplateOutletContext]="{request: request, tipo: 'activo'}" *ngFor="let request of RequestList"></ng-container>
 
         <ion-row *ngIf="RequestFinishedList.length">
-            <ion-col size="12" class="mt-4 titulo-modulo">
+            <ion-col size="12" class="mt-4 subtitulo-modulo">
                 Solicitudes Terminadas
             </ion-col>
         </ion-row>
@@ -73,7 +73,7 @@
                 </ion-col>
                 <ion-col size="6" class="detalle-solicitud" *ngIf="tipo === 'activo'">
                     <span>{{ request.fecha_limite }}</span>
-                    <div [class]="request.status" class="ms-4 custom-tags"></div>
+                    <div [class]="request.status" class="ms-2 custom-tags"></div>
                 </ion-col>
                 <ng-container *ngIf="tipo !== 'activo'" [ngTemplateOutlet]="btnVer" [ngTemplateOutletContext]="{request: request, tipo: tipo}"></ng-container>
             </ion-row>

@@ -85,6 +85,10 @@ body {
     --background: #F7F8FC;
     .titulo-modulo {
         font-size: 20px;
+        //font-family: "Mulish-Black";
+    }
+    .subtitulo-modulo {
+        font-size: 18px;
     }
 }
 
@@ -112,4 +116,27 @@ ion-select.select-fill-outline:not(.legacy-select) {
 
 .form-error {
     font-size: 12px;
+}
+
+.breadcrumb-native {
+    border-radius: 4px;
+    padding-inline: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid transparent;
+}
+
+@media (max-width: 576px) {
+    body {
+        font-size: 0.9rem;
+    }
+    .content-principal .titulo-modulo {
+        font-size: 1.1rem;
+    }
+    .content-principal .subtitulo-modulo {
+        font-size: 1rem;
+    }
+    .card-content-md {
+        font-size: 0.9rem;
+    }
 }

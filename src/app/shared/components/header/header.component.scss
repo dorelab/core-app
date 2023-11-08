@@ -32,7 +32,7 @@
     ion-chip.perfil {
         background: transparent;
         font-size: 14px;
-        padding-inline-start: 8px;
+        padding-inline-start: 0;
         padding-inline-end: 3px;
         height: 50px;
         ion-avatar {
@@ -106,13 +106,19 @@
 @media (max-width: 576px) {
     .header-principal {
         ion-menu-button {
-            font-size: 32px !important;
+            font-size: 1.7rem !important;
+            width: 40px;
+            height: 40px;
+            --padding-start: 0;
+            button.button-native {
+                padding-inline-start: 0;
+            }
         }
         .img-logo-gs {
-            max-height: 35px;
+            max-height: 1.65rem;
         }
         .img-logo-core {
-            max-height: 50px;
+            max-height: 2.3rem;
         }
         ion-chip.perfil ion-avatar {
             width: 30px;
@@ -123,8 +129,17 @@
         }
         .img-logo-gs,
         .img-logo-core {
-            margin-right: 0.7rem!important;
-            margin-left: 0.7rem!important;
+            margin-right: 0.45rem !important;
+            margin-left: 0.45rem !important;
+        }
+        .nombre-asesor {
+            width: 90px;
+            line-height: 1.2;
+            font-size: 0.8rem;
+        }
+        .sc-ion-buttons-md-s ion-button {
+            --padding-start: 0;
+            --padding-end: 0;
         }
     }
 }
