@@ -21,5 +21,7 @@ export class HomePage implements OnInit {
     this.infoUser = JSON.parse(getLocalStorageUser() || '');
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('home');
+  }
 }

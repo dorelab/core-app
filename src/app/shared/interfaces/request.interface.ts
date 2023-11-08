@@ -12,7 +12,8 @@ export interface IRequestModel {
   consejero?: DataConsejero;
   consejero_nombre?: string;
   sesion?: SesionRequesModel;
-  archivo?: number;
+  archivo?: string;
+  archivo_nombre?: string;
   fecha_solicitud_format?: string | null | undefined;
   fecha_limite_format?: string | null | undefined;
   status?: string;
@@ -34,11 +35,11 @@ export interface ITypeRequestModel {
 }
 
 export interface RequestFiltersForm {
-  consejero: FormControl<number>;
+  consejero__id: FormControl<number>;
   tipo: FormControl<number[]>;
   search: FormControl<string>;
-  fecha_inicio: FormControl<string>;
-  fecha_termino: FormControl<string>;
+  fecha_solicitud__lte: FormControl<string>;
+  fecha_solicitud__gte: FormControl<string>;
 }
 
 export interface RequestForm {
@@ -46,9 +47,10 @@ export interface RequestForm {
   descripcion: FormControl<string>;
   observaciones: FormControl<string>;
   fecha_solicitud: FormControl<string>;
+  fecha_limite: FormControl<string>;
   consejero: FormControl<number | null>;
   sesion: FormControl<number>;
-  archivo: FormControl<any>;
+  archivo_: FormControl<string>;
 }
 
 export interface ResponseRequestForm {
@@ -61,7 +63,8 @@ export interface ResponseRequestModel {
   id?: number;
   solicitud?: number;
   respuesta?: string;
-  archivo?: File | string | null ;
+  archivo?: string;
+  archivo_nombre?: string;
 }
 
 export interface RequestFilters {

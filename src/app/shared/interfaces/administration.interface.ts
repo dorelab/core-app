@@ -5,3 +5,8 @@ export interface IAPIDocs {
   readonly descripcion:string;
   readonly fecha:string;
 }
+
+export interface DefinitionsModel {
+  readonly id: number;
+  readonly nombre: string;
+}

@@ -13,8 +13,11 @@ export class SesionService {
     private apiService: ApiService,
   ) {}
 
-
   createPrivateSession(body: Sesion): Observable<any>{
     return this.apiService.post(`${this.path}/sesion/`, body);
+  }
+
+  getSesionsByID(id: number): Observable<any> {
+    return this.apiService.get(`${this.path}/sesion/${id}/`);
   }
 }

@@ -19,7 +19,8 @@ export class ListadoSolicitudPage implements OnInit {
   }
 
   ngOnInit() {
-    //this.getListRequest({filters: {consejero: this.infoUser.usuario_id}, loadListFinish: true});
+    console.log('lista solicitud');
+    this.getListRequest({filters: {consejero__id: this.infoUser.usuario_id}, loadListFinish: true});
   }
 
   getListRequest(event: any) {

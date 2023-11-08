@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { RequestService, ITypeRequestModel, RequestFilters, RequestFiltersForm} from '../../../../shared';
+import { RequestService, ITypeRequestModel, RequestFilters, RequestFiltersForm, AlertsService} from '@app/shared';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
 
@@ -11,6 +11,7 @@ import * as moment from 'moment';
 
 export class FormFiltersListComponent implements OnInit {
   private _RequestService: RequestService = inject(RequestService);
+  private _AlertsService: AlertsService = inject(AlertsService);
   public listTypesRequest: ITypeRequestModel[] = [];
   public formFilter!: FormGroup<RequestFiltersForm>;
   private _fb: NonNullableFormBuilder = inject(NonNullableFormBuilder);
@@ -35,11 +36,11 @@ export class FormFiltersListComponent implements OnInit {
   private _buildForm(): void {
     this.formFilter = this._fb.group<RequestFiltersForm>(
       {
-        consejero: this._fb.control(this.idUserLogin, {validators: [Validators.required]}),
+        consejero__id: this._fb.control(this.idUserLogin, {validators: [Validators.required]}),
         tipo: this._fb.control([], { validators: []}),
         search: this._fb.control('', { validators: []}),
-        fecha_inicio: this._fb.control('', { validators: []}),
-        fecha_termino: this._fb.control('', { validators: []})
+        fecha_solicitud__lte: this._fb.control('', { validators: []}),
+        fecha_solicitud__gte: this._fb.control('', { validators: []})
       }
     );
   }
@@ -52,24 +53,18 @@ export class FormFiltersListComponent implements OnInit {
     });
   }
 
-  onChangeDate(result: Date[]): void {
-    console.log('onChange: ', result);
-    this.formControls.fecha_inicio.setValue('');
-    this.formControls.fecha_termino.setValue('');
-
-    if(result[0]) {
-      const fechaInicio = moment(result[0]).format('YYYY-MM-DD');
-      this.formControls.fecha_inicio.setValue(fechaInicio);
-    }
-
-    if(result[1]) {
-      const fechaFin = moment(result[1]).format('YYYY-MM-DD');
-      this.formControls.fecha_termino.setValue(fechaFin);
-    }
-  }
-
   handleFilter() {
+    const rangeDates = this.datesRange.value;
+
+    if(this.datesRange.invalid || (rangeDates.start !== null && rangeDates.end === null) || (rangeDates.start === null && rangeDates.end !== null)) {
+      this._AlertsService.openSnackBar('¡Por favor, ingrese un rango de fechas correcto!', 'error');
+      return;
+    }
+
     const filters = this.formFilter.value;
+    filters.fecha_solicitud__gte = rangeDates.start ? moment(rangeDates.start).format('YYYY-MM-DD') : '';
+    filters.fecha_solicitud__lte = rangeDates.end ? moment(rangeDates.end).format('YYYY-MM-DD') : '';
+
     this.onFilter.emit({filters, loadListFinish: false});
   }
 }

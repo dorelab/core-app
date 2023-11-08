@@ -1,3 +1,4 @@
+import { UserLoginModel } from './../shared/interfaces/auth.interface';
 import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -57,9 +58,14 @@ export class LoginPage implements OnInit {
     const dataLogin = this.formData.value;
 
     this.authService.loginByApi(dataLogin).subscribe({
-      next: (data) => {
-        if (data.estado === 'fallo') {
-          this.alertsService.openSnackBar(data.mensaje, 'error');
+      next: (data: UserLoginModel) => {
+        if (data.success !== 1) {
+          this.alertsService.openSnackBar('ERROR al Iniciar Sesión', 'error');
+          return false;
+        }
+
+        if (data.perfil !== 2) {
+          this.alertsService.openSnackBar('¡Solo pueden Iniciar Sesión los Usuarios Consejeros!', 'error');
           return false;
         }
 

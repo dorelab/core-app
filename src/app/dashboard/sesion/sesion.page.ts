@@ -24,7 +24,7 @@ export class SesionPage implements OnInit {
   public users: ListData | null = null;
   public isShowResult: boolean = false;
   public messageResult = {
-    icon:'check',
+    icon:'checkmark-circle-outline',
     title:'Sesión Agendada',
     subTitle:'Su sesión ',
     showButton: true,
@@ -52,6 +52,7 @@ export class SesionPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log('sesion');
     this._getUsers({
       perfil: '2'
     })

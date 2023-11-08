@@ -8,20 +8,13 @@ import { ApiService } from './api.service';
 export class AdministrationService {
   private path = 'administration';
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService) {}
 
-  /*createComuna(body: ComunaCreateModel): Observable<any> {
-    const url = `${this.path}/comuna/`;
-    return this.apiService.post(url, body);
+  getDefinitions(): Observable<any> {
+    return this.apiService.get(`${this.path}/informacion-historica/filtros/`);
   }
 
-  getComunasId(regionId: number): Observable<any> {
-    const url = `${this.path}/region/${regionId}/comunas/`;
-    return this.apiService.get(url);
-  }
-
-  updateComuna(body: ComunaAdminModel): Observable<any> {
-    const url = `${this.path}/comuna/${body.id}/`;
-    return this.apiService.put(url, body);
+  /*uploadDocs(body: IBodyModel): Observable<> {
+    return this.apiService.post(`${this.path}/documento/`, body);
   }*/
 }

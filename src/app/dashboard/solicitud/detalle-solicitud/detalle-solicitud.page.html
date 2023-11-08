@@ -1,13 +1,159 @@
-<ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title>detalle-solicitud</ion-title>
-    </ion-toolbar>
-</ion-header>
+<ion-content class="content-principal ion-padding content-detalle-solicitud">
+    <ion-grid class="custom_container">
+        <ion-row>
+            <ion-col size="12" class="titulo-modulo">
+                Solicitudes
+            </ion-col>
+        </ion-row>
 
-<ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">detalle-solicitud</ion-title>
-        </ion-toolbar>
-    </ion-header>
+        <ion-row>
+            <ion-col size="12" class="pt-4 pb-4">
+                <ion-breadcrumbs mode="ios" class="ion-no-padding">
+                    <ion-breadcrumb [routerLink]="'/dashboard/solicitud/listado'">Solicitudes</ion-breadcrumb>
+                    <ion-breadcrumb [routerLink]="null">Ver Solicitud</ion-breadcrumb>
+                </ion-breadcrumbs>
+            </ion-col>
+        </ion-row>
+
+        <ion-card class="ion-padding">
+            <ion-card-header>Detalle de Solicitud</ion-card-header>
+            <ion-card-content>
+                <ion-row>
+                    <ion-col size="12" class="titulo-solicitud">
+                        Tipo de Solicitud
+                    </ion-col>
+
+                    <ion-col size="12" class="detalle-solicitud">
+                        {{ dataRequest.tipo }}
+                    </ion-col>
+
+                    <ion-col size="12" class="titulo-solicitud">
+                        Solicitante
+                    </ion-col>
+
+                    <ion-col size="12" class="detalle-solicitud">
+                        {{ dataRequest.consejero?.nombre }}
+                    </ion-col>
+
+                    <ion-col size="12" class="titulo-solicitud">
+                        Descripción
+                    </ion-col>
+
+                    <ion-col size="12" class="detalle-solicitud">
+                        {{ dataRequest.descripcion }}
+                    </ion-col>
+
+                    <ion-col size="12" class="titulo-solicitud">
+                        Tipo de Sesión
+                    </ion-col>
+
+                    <ion-col size="12" class="detalle-solicitud">
+                        {{ dataRequest.sesion?.nombre }}
+                    </ion-col>
+
+                    <ion-col size="12" class="titulo-solicitud">
+                        Observaciones
+                    </ion-col>
+
+                    <ion-col size="12" class="detalle-solicitud">
+                        {{ dataRequest.observaciones }}
+                    </ion-col>
+
+                    <ion-col size="12" class="titulo-solicitud">
+                        Archivo
+                    </ion-col>
+
+                    <ion-col size="12" class="detalle-solicitud">
+                        {{ dataRequest.archivo_nombre }}
+                    </ion-col>
+
+                    <ion-col size="12" class="text-center">
+                        <ion-button color="primary" (click)="openFile()">
+                            Descargar Archivo
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card class="ion-padding mt-4" *ngIf="dataResponseRequest.id">
+            <ion-card-header>Respuesta de Solicitud</ion-card-header>
+            <ion-card-content>
+                <ion-row>
+                    <ion-col size="12" class="detalle-solicitud">
+                        {{ dataResponseRequest.respuesta }}
+                    </ion-col>
+
+                    <ion-col size="12" class="detalle-solicitud">
+                        {{ dataResponseRequest.archivo_nombre }}
+                    </ion-col>
+
+                    <ion-col size="12" class="text-center">
+                        <ion-button color="primary" (click)="openFile(true)">
+                            Descargar Archivo
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+    </ion-grid>
 </ion-content>
+
+<ng-template #templateRequest let-request='request' let-tipo='tipo'>
+    <ion-card class="card-list">
+        <ion-card-content class="ion-no-padding">
+            <ion-row>
+                <ion-col size="6" class="titulo-solicitud">
+                    Solicitante
+                </ion-col>
+                <ion-col size="6" class="titulo-solicitud">
+                    Tipo de Solicitud
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6" class="detalle-solicitud">
+                    {{ request.consejero.nombre }}
+                </ion-col>
+                <ion-col size="6" class="detalle-solicitud">
+                    {{ request.tipo }}
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="6" class="titulo-solicitud">
+                    Fecha Solicitud
+                </ion-col>
+                <ion-col size="6" class="titulo-solicitud">
+                    {{ tipo === 'activo' ? 'Fecha Límite' : 'Ver Solicitud'}}
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6" class="detalle-solicitud">
+                    {{ request.fecha_solicitud }}
+                </ion-col>
+                <ion-col size="6" class="detalle-solicitud" *ngIf="tipo === 'activo'">
+                    <span>{{ request.fecha_limite }}</span>
+                    <div [class]="request.status" class="ms-4 custom-tags"></div>
+                </ion-col>
+                <ng-container *ngIf="tipo !== 'activo'" [ngTemplateOutlet]="btnVer" [ngTemplateOutletContext]="{request: request, tipo: tipo}"></ng-container>
+            </ion-row>
+
+            <ion-row *ngIf="tipo === 'activo'">
+                <ion-col size="12" class="titulo-solicitud">
+                    Ver Solicitud
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="tipo === 'activo'">
+                <ng-container [ngTemplateOutlet]="btnVer" [ngTemplateOutletContext]="{request: request, tipo: tipo}"></ng-container>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+</ng-template>
+
+<ng-template #btnVer let-request='request' let-tipo='tipo'>
+    <ion-col [size]="tipo === 'activo' ? 12 : 6" class="detalle-solicitud text-center">
+        <ion-button color="primary" [routerLink]="['/dashboard/solicitud/detalle/', request.id]">
+            Ver
+        </ion-button>
+    </ion-col>
+</ng-template>

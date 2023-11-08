@@ -8,7 +8,7 @@ const routes: Routes = [
     component: SolicitudPage,
     children: [
       {
-        path: 'crear',
+        path: 'crear/:sessionID',
         loadChildren: () => import('./crear-solicitud/crear-solicitud.module').then( m => m.CrearSolicitudPageModule)
       },
       {
@@ -17,7 +17,7 @@ const routes: Routes = [
       },
       {
         path:'detalle/:requestID',
-        loadChildren: () => import('./listado-solicitud/listado-solicitud.module').then( m => m.ListadoSolicitudPageModule)
+        loadChildren: () => import('./detalle-solicitud/detalle-solicitud.module').then( m => m.DetalleSolicitudPageModule)
       },
       {
         path: '**',

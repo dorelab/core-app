@@ -1,0 +1,18 @@
+::ng-deep .content-crear-solicitud {
+    ion-breadcrumb {
+        .breadcrumb-native {
+            padding-inline: 0 !important;
+        }
+    }
+    mat-calendar {
+        max-width: 320px;
+        margin: 0 auto;
+        .mdc-button__label span {
+            font-size: 1.8rem;
+            color: #626262;
+        }
+    }
+    .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+    }
+}

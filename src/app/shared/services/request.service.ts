@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Sesion } from '../_class';
 import { Observable } from 'rxjs';
-import { RequestFilters } from '../interfaces';
+import { IRequestModel, RequestFilters } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +21,17 @@ export class RequestService {
 
   getTypesRequests(): Observable<any> {
     return this.apiService.get(`${this.path}/solicitud/tipos/`);
+  }
+
+  getRequestByID(id: number | string): Observable<any> {
+    return this.apiService.get(`${this.path}/solicitud/${id}/`);
+  }
+
+  getResponseRequestByID(id: number | string): Observable<any> {
+    return this.apiService.get(`${this.path}/solicitud-respuesta/${id}/`);
+  }
+
+  saveRequest(data: any): Observable<any> {
+    return this.apiService.post(`${this.path}/solicitud/`, data);
   }
 }

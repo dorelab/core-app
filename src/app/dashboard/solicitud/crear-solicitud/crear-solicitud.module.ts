@@ -7,12 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { CrearSolicitudPageRoutingModule } from './crear-solicitud-routing.module';
 
 import { CrearSolicitudPage } from './crear-solicitud.page';
+import { SharedModule } from '@app/shared';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
+    MatFormFieldModule,
+    MatInputModule,
     CrearSolicitudPageRoutingModule
   ],
   declarations: [CrearSolicitudPage]

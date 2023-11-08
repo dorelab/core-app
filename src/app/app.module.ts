@@ -8,7 +8,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
-import { environment } from 'src/environments/environment';
+import { environment, ENVIRONMENT } from 'src/environments/environment';
 import { LoginStoreModule } from './login/+state/login-store.module';
 
 import localeEs from '@angular/common/locales/es';
@@ -46,6 +46,10 @@ import { EffectsModule } from '@ngrx/effects';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LOCALE_ID, useValue: 'es-ES'},
+    {
+      provide: ENVIRONMENT,
+      useValue: environment,
+    },
   ],
   bootstrap: [AppComponent],
 })

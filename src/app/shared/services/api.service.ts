@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ApiService {
-  private route = `${environment.endpoint}/v1`;
+  private route = `${environment.urlApi}`;
   private headersToSend = new HttpHeaders();
 
   constructor(
