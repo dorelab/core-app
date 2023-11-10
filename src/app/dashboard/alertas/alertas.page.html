@@ -1,0 +1,82 @@
+<ion-content class="content-principal ion-padding content-alertas">
+    <ion-grid class="custom_container">
+        <ion-row>
+            <ion-col size="12" class="titulo-modulo">
+                Alertas
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="subtitulo-modulo mt-3">
+                Bandeja de Estado de Alertas
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="ion-no-padding">
+                <dynamic-filter (onSearch)="handleFilter($event)" (onClearSearch)="handleFilter('')" />
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="pb-4">
+                <ion-button mat-button [matMenuTriggerFor]="menu" color="primary">
+                    <ion-icon name="funnel" class="me-2"></ion-icon>
+                    Filtrar
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="ion-no-padding">
+                <ion-card class="card-list mb-4" *ngFor="let alert of alertsList">
+                    <ion-card-content class="ion-no-padding">
+                        <ion-row>
+                            <ion-col size="6" class="titulo-solicitud">
+                                Alerta
+                            </ion-col>
+                            <ion-col size="6" class="titulo-solicitud">
+                                Fecha Solicitud
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row>
+                            <ion-col size="6" class="detalle-solicitud">
+                                {{ alert.tipo }}
+                            </ion-col>
+                            <ion-col size="6" class="detalle-solicitud">
+                                {{ alert.fecha_format }}
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row>
+                            <ion-col size="12" class="titulo-solicitud">
+                                Descripción
+                            </ion-col>
+                            <ion-col size="12" class="detalle-solicitud">
+                                {{ alert.descripcion }}
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row>
+                            <ion-col size="12" class="detalle-solicitud ion-justify-content-center ion-align-items-center">
+                                <ion-icon name="trash" size="large" (click)="onRemoveAlert(alert)"></ion-icon>
+                            </ion-col>
+                        </ion-row>
+
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item *ngFor="let type of alertTypes" (click)="changeType(type.id)">
+        {{ type.nombre }}
+    </button>
+    <button mat-menu-item (click)="changeType('')">
+        TODOS
+    </button>
+</mat-menu>

@@ -14,7 +14,7 @@ import { MatListOption } from '@angular/material/list';
 @Component({
   selector: 'dynamic-list',
   templateUrl: './dynamic-list.component.html',
-  styleUrls: ['./dynamic-list.component.less'],
+  styleUrls: ['./dynamic-list.component.scss'],
 })
 export class DynamicListComponent implements OnChanges {
   @Input({required:true}) dataSet: ListData | null = null;

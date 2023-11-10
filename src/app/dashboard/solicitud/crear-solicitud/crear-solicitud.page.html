@@ -21,9 +21,9 @@
                     <mat-calendar [selected]="selectedDate" (selectedChange)="selectedDate = $event; handleDate($event);"></mat-calendar>
                 </ion-col>
 
-                <ion-col size="12" class="px-2 mb-3">
+                <ion-col size="12" class="px-2 mb-3 content-fecha-limite">
                     <ion-label position="stacked">Fecha Límite</ion-label>
-                    <mat-form-field class="w-100" appearance="outline">
+                    <mat-form-field class="w-100 input-date" appearance="outline">
                         <input matInput [matDatepicker]="pickerFecha" (dateChange)="changeDate($event)">
                         <mat-datepicker-toggle matIconSuffix [for]="pickerFecha"></mat-datepicker-toggle>
                         <mat-datepicker #pickerFecha></mat-datepicker>

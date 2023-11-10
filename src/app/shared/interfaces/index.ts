@@ -1,4 +1,5 @@
 export * from './administration.interface'
+export * from './alert.interface'
 export * from './auth.interface'
 export * from './item-menu.interface'
 export * from './dynamic-list.interface'

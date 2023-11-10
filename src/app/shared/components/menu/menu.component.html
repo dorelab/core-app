@@ -1,28 +1,30 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-grid>
-            <ion-row class="ion-justify-content-center ion-align-items-center p-3">
-                <ion-col size="6" class="ion-text-center">
-                    <img class="img-logo" src="../../assets/images/gs_logo.png" />
-                </ion-col>
-                <ion-col size="6" class="ion-text-center">
-                    <img class="img-logo" src="../../assets/images/core_logo.svg" />
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-toolbar>
-</ion-header>
-<ion-content class="content-menu">
-    <ion-list class="p-0 lista-menu-principal">
-        <ion-item button #rla="routerLinkActive" *ngFor="let page of opcionesMenuFiltradas; let i = index" lines="none" [matTooltip]="page.title" (click)="selectedIndex = i" [routerLink]="'/dashboard' + [page.url]" routerLinkActive [routerLinkActiveOptions]="{ exact: false }"
-            [class.selected]="rla.isActive">
-            <i [class]="page.icon" class="me-3"></i>
-            <ion-label>{{ page.title }}</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-menu-toggle class="w-100">
-                <ion-button color="secondary" expand="block">Cerrar Menú</ion-button>
-            </ion-menu-toggle>
-        </ion-item>
-    </ion-list>
-</ion-content>
+<ion-menu #menuPrincipal contentId="main-content" class="menu-principal">
+    <ion-header>
+        <ion-toolbar>
+            <ion-grid>
+                <ion-row class="ion-justify-content-center ion-align-items-center p-3">
+                    <ion-col size="6" class="ion-text-center">
+                        <img class="img-logo img-logo-gs" src="../../assets/images/gs_logo.png" />
+                    </ion-col>
+                    <ion-col size="6" class="ion-text-center">
+                        <img class="img-logo img-logo-core" src="../../assets/images/core_logo.svg" />
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content class="content-menu">
+        <ion-list class="p-0 lista-menu-principal">
+            <ion-item button #rla="routerLinkActive" *ngFor="let page of opcionesMenuFiltradas; let i = index" lines="none" [matTooltip]="page.title" (click)="selectedIndex = i; menuPrincipal.close();" [routerLink]="'/dashboard' + [page.url]" routerLinkActive [routerLinkActiveOptions]="{ exact: false }"
+                [class.selected]="rla.isActive">
+                <i [class]="page.icon" class="me-3"></i>
+                <ion-label>{{ page.title }}</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-menu-toggle class="w-100">
+                    <ion-button color="secondary" expand="block">Cerrar Menú</ion-button>
+                </ion-menu-toggle>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-menu>

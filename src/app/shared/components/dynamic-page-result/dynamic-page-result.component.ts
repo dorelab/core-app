@@ -4,7 +4,7 @@ import { PageResultModel } from '../../interfaces';
 @Component({
   selector: 'dynamic-page-result',
   templateUrl: './dynamic-page-result.component.html',
-  styleUrls: ['./dynamic-page-result.component.less'],
+  styleUrls: ['./dynamic-page-result.component.scss'],
 })
 export class DynamicPageResultComponent {
   @Input() set message(info: PageResultModel | null) {

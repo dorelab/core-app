@@ -1,0 +1,22 @@
+::ng-deep .content-alertas {
+    ion-card.card-list {
+        --color: #252733;
+        ion-row {
+            ion-col {
+                border: 1px solid #EAECF0;
+                min-height: 50px;
+                display: flex;
+                align-items: center;
+                padding: 0.5rem 0.8rem;
+            }
+            .titulo-solicitud {
+                font-weight: bold;
+                background-color: #EDF5F5;
+            }
+            .detalle-solicitud {
+                background-color: #FFFFFF;
+                font-family: 'Mulish-Regular';
+            }
+        }
+    }
+}

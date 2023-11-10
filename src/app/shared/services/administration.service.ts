@@ -1,10 +1,11 @@
-import { Observable, catchError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { ApiService } from './api.service';
+
 @Injectable({
   providedIn: 'root',
 })
+
 export class AdministrationService {
   private path = 'administration';
 

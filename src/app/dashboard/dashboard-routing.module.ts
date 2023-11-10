@@ -32,6 +32,11 @@ const routes: Routes = [
         path: 'solicitud',
         loadChildren: () =>
           import('./solicitud/solicitud.module').then((m) => m.SolicitudPageModule),
+      },
+      {
+        path: 'alertas',
+        loadChildren: () =>
+          import('./alertas/alertas.module').then((m) => m.AlertasPageModule),
       }
     ],
   },

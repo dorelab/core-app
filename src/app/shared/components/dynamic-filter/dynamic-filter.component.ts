@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'dynamic-filter',
   templateUrl: './dynamic-filter.component.html',
-  styleUrls: ['./dynamic-filter.component.less']
+  styleUrls: ['./dynamic-filter.component.scss']
 })
 export class DynamicFilterComponent {
   @Input() header:string | null=null;

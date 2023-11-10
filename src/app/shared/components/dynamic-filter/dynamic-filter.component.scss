@@ -1,0 +1,12 @@
+::ng-deep {
+    .card-filter {
+        .input-search.sc-ion-input-md-h:not(.legacy-input) {
+            min-height: 42px;
+        }
+        .button-filter {
+            margin-top: 0;
+            margin-bottom: 0;
+            min-height: 40px;
+        }
+    }
+}
