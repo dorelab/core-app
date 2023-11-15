@@ -5,18 +5,18 @@
                 <ion-card class="ion-no-margin ion-padding">
                     <ion-card-header class="text-center ion-padding">
                         <ion-grid class="ion-no-margin">
-                            <ion-row class="ion-justify-content-center ion-align-items-center p-3">
-                                <ion-col size="6" class="ion-text-center">
+                            <ion-row class="ion-justify-content-center ion-align-items-center">
+                                <ion-col size="6" class="ion-text-center p-2">
                                     <img class="img-logo-gs" src="../assets/images/gs_logo.png" />
                                 </ion-col>
-                                <ion-col size="6" class="ion-text-center">
+                                <ion-col size="6" class="ion-text-center p-2">
                                     <img class="img-logo-core" src="../assets/images/core_logo.svg" />
                                 </ion-col>
                             </ion-row>
                         </ion-grid>
                     </ion-card-header>
 
-                    <ion-card-content>
+                    <ion-card-content class="ion-no-padding">
                         <ion-row class="row-form ion-justify-content-center ion-align-items-center">
                             <ion-col size="12" class="ion-padding">
                                 <ion-label position="stacked" class="text-uppercase">Correo</ion-label>
@@ -35,10 +35,10 @@
                             </ion-col>
 
                             <ion-col size="12" class="ion-padding ion-text-end">
-                                <a class="text-muted" style="text-decoration: none; cursor: pointer">¿Olvidaste tu contraseña?</a>
+                                <a class="text-muted" style="text-decoration: none; cursor: pointer" (click)="handlerModal()">¿Olvidaste tu contraseña?</a>
                             </ion-col>
 
-                            <ion-col size="12" class="ion-padding-horizontal ion-padding-top ion-text-center">
+                            <ion-col size="12" class="ion-padding-horizontal ion-padding-vertical ion-text-center">
                                 <ion-button color="primary" class="w-100" (click)="login()">
                                     Entrar
                                 </ion-button>

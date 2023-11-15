@@ -33,13 +33,13 @@ export class AuthService {
   }
 
   sendEmailRestore(email: string): Observable<any> {
-    return this.ApiService.post(`${this.prefijoRuta}/password/restore/`, {
+    return this.ApiService.post(`${this.prefijoRuta}/recuperar-password/request/`, {
       email,
     });
   }
 
   restorePassword(data: PasswordRecoverModel): Observable<any> {
-    return this.ApiService.post(`${this.prefijoRuta}/password/confirm/`, data);
+    return this.ApiService.post(`${this.prefijoRuta}/recuperar-password/recover/`, data);
   }
 
   changePassword(data: ChangePasswordModel): Observable<any> {

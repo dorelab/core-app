@@ -147,6 +147,53 @@ ion-select.select-fill-outline:not(.legacy-select) {
     border: 1px solid transparent;
 }
 
+.mat-mdc-snack-bar-container:not([mat-exit]) {
+    --mdc-snackbar-supporting-text-font: var(--ion-font-family) !important;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+.mat-mdc-snack-bar-container:not([mat-exit]).valid-alert {
+    --mdc-snackbar-container-color: #f9f4e6;
+    --mdc-snackbar-supporting-text-color: #856404;
+    border-color: #856404;
+}
+
+.mat-mdc-snack-bar-container:not([mat-exit]).error-alert {
+    --mdc-snackbar-supporting-text-font: var(--ion-font-family) !important;
+    --mdc-snackbar-container-color: #f5e8e9;
+    --mdc-snackbar-supporting-text-color: #721c24;
+    border-color: #721c24;
+}
+
+.mat-mdc-snack-bar-container:not([mat-exit]).info-alert {
+    --mdc-snackbar-supporting-text-font: var(--ion-font-family) !important;
+    --mdc-snackbar-container-color: #e7e8f7;
+    --mdc-snackbar-supporting-text-color: #080c38;
+    border-color: #080c38;
+}
+
+.mat-mdc-snack-bar-container:not([mat-exit]).success-alert {
+    --mdc-snackbar-supporting-text-font: var(--ion-font-family) !important;
+    --mdc-snackbar-container-color: #ebf1ed;
+    --mdc-snackbar-supporting-text-color: #155724;
+    border-color: #155724;
+}
+
+ion-modal.modal-default {
+    .header-md {
+        box-shadow: none;
+    }
+}
+
+@media (max-width: 768px) {
+    ion-modal.modal-default {
+        --width: 90%;
+        --height: 90%;
+    }
+}
+
 @media (max-width: 576px) {
     body {
         font-size: 0.9rem;

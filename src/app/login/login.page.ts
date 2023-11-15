@@ -6,7 +6,9 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { AuthService, AlertsService } from '../shared/services';
+import { AuthService, AlertsService, ControlModalService } from '../shared/services';
+import { ModalResetPasswordComponent } from './components/modal-reset-password/modal-reset-password.component';
+import { ModalNewPasswordComponent } from './components/modal-new-password/modal-new-password.component';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -33,6 +35,7 @@ export class LoginPage implements OnInit {
     public alertsService: AlertsService,
     private modalCtrl: ModalController,
     private store: Store<fromReducer.State>,
+    private controlModalService: ControlModalService,
     private route: ActivatedRoute,
   ) {
     this.formData = this.fb.group({
@@ -46,6 +49,10 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     if (this.authService.userHasToken()) {
       this.router.navigate(['/dashboard/home']);
+    }
+
+    if(this.codigo !== '' && this.codigo !== null) {
+      this.handlerNewPswModal();
     }
   }
 
@@ -105,7 +112,10 @@ export class LoginPage implements OnInit {
   restablecerContrasenna(email: string) {
     this.authService.sendEmailRestore(email).subscribe({
       next: (resp) => {
-        this.alertsService.openSnackBar(resp.mensaje);
+        if(resp.success === 1){
+          this.alertsService.openSnackBar(resp.message);
+        }
+
         return true;
       },
       error: (e) => {
@@ -114,7 +124,32 @@ export class LoginPage implements OnInit {
     });
   }
 
-  redirectTo(code: number) {
-    this.router.navigate(['../registro', code]);
+  async handlerModal() {
+    this.controlModalService
+      .create({
+        component: ModalResetPasswordComponent,
+      })
+      .subscribe((detail) => {
+        if (detail && detail.data && detail.role === 'confirm') {
+          this.restablecerContrasenna(detail.data);
+        }
+      });
+  }
+
+  handlerNewPswModal() {
+    this.controlModalService
+      .create({
+        component: ModalNewPasswordComponent,
+      })
+      .subscribe(({ data }) => {
+        this.store.dispatch(
+          fromActions.loadRestorePsw({
+            data: {
+              codigo: this.codigo,
+              password: data.password,
+            },
+          })
+        );
+      });
   }
 }

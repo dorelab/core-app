@@ -25,6 +25,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'login/:codigo',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    canActivate: [
+      isAuthenticated
+    ]
+  },
+  {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule),
     canActivate: [

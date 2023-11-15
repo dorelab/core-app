@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
+import { ModalResetPasswordComponent } from './components/modal-reset-password/modal-reset-password.component';
+import { ModalNewPasswordComponent } from './components/modal-new-password/modal-new-password.component';
 import { LoginStoreModule } from './+state/login-store.module';
 import { SharedModule } from '../shared/shared.module';
 
@@ -19,6 +21,6 @@ import { SharedModule } from '../shared/shared.module';
     LoginPageRoutingModule,
     SharedModule
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage, ModalResetPasswordComponent, ModalNewPasswordComponent]
 })
 export class LoginPageModule {}
