@@ -37,14 +37,14 @@ const routes: Routes = [
         path: 'alertas',
         loadChildren: () =>
           import('./alertas/alertas.module').then((m) => m.AlertasPageModule),
+      },
+      {
+        path: 'misdatos',
+        loadChildren: () =>
+          import('./mis-datos/mis-datos.module').then((m) => m.MisDatosPageModule),
       }
     ],
-  },
-  {
-    path: 'solicitud',
-    loadChildren: () => import('./solicitud/solicitud.module').then( m => m.SolicitudPageModule)
   }
-
 ];
 
 @NgModule({

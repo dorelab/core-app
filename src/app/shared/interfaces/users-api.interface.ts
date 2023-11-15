@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { IApiResponseDetailKey } from './data.interface';
 
 export interface IApiUser {
@@ -57,3 +58,34 @@ export interface IApiRequestAssignTeams {
 export interface IApiRequestRemoveAssign {
   readonly usuario_id:number;
 }
+
+export interface IUserForm {
+  nombre: FormControl<string>;
+  email: FormControl<string>;
+  rut: FormControl<string>;
+  telefono: FormControl<string | null>;
+  circunscripcion: FormControl<string>;
+  bancada: FormControl<number | null>;
+  partido: FormControl<number | null>;
+  perfil: FormControl<number | null>;
+  password: FormControl<string>;
+  confirm_password: FormControl<string>;
+  imagen: FormControl<File | string | null>;
+  estado:FormControl<boolean>;
+  is_active:FormControl<boolean>;
+}
+
+export interface IUserHomeForm {
+  nombre: FormControl<string>;
+  email: FormControl<string>;
+  rut: FormControl<string>;
+  telefono: FormControl<string | null>;
+  circunscripcion: FormControl<string>;
+  bancada: FormControl<number | null>;
+  partido: FormControl<number | null>;
+  perfil: FormControl<number | null>;
+  imagen: FormControl<File | string | null>;
+  estado:FormControl<boolean>;
+  is_active:FormControl<boolean>;
+}
+

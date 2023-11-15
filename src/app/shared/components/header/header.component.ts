@@ -58,12 +58,4 @@ export class HeaderComponent implements OnInit {
     this.unsubscribe$.complete();
     this.authService.cerrarSessionUser();
   }
-
-  routerEdit(perfil:number,userId:number){
-    /*if(perfil === 2){
-      this.router.navigate(['/dashboard/users/edit-user',userId])
-    } else {
-      this.router.navigate(['/dashboard/users/edit-researcher',userId])
-    }*/
-  }
 }

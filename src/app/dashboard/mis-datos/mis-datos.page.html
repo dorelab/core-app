@@ -1,0 +1,76 @@
+<ion-content class="content-principal ion-padding content-mis-datos">
+    <ion-grid class="custom_container">
+        <ion-row>
+            <ion-col size="12" class="titulo-modulo">
+                Mis Datos
+            </ion-col>
+        </ion-row>
+
+        <form [formGroup]="formUser">
+            <ion-row>
+                <ion-col size="12" class="my-3 d-flex ion-justify-content-center">
+                    <ion-avatar class="avatar-profile" (click)="fileUpload.click()">
+                        <img [src]="imgURL" *ngIf="imgURL" />
+                    </ion-avatar>
+                    <input #fileUpload hidden type="file" accept='image/*' class="file-input" name="files[]" (change)="changeFile($event)">
+                </ion-col>
+
+                <ion-col size="12" class="ion-padding-vertical">
+                    <ion-label position="stacked" class="text-uppercase">Nombre Completo*</ion-label>
+                    <ion-input type="text" formControlName="nombre" fill="outline"></ion-input>
+                </ion-col>
+
+                <ion-col size="12" class="ion-padding-vertical">
+                    <ion-label position="stacked" class="text-uppercase">E-Mail*</ion-label>
+                    <ion-input type="email" formControlName="email" fill="outline"></ion-input>
+                </ion-col>
+
+                <ion-col size="12" class="ion-padding-vertical">
+                    <ion-label position="stacked" class="text-uppercase">RUT*</ion-label>
+                    <ion-input type="email" formControlName="rut" fill="outline"></ion-input>
+                </ion-col>
+
+                <ion-col size="12" class="ion-padding-vertical">
+                    <ion-label position="stacked" class="text-uppercase">Teléfono Contacto*</ion-label>
+                    <ion-input type="email" formControlName="telefono" fill="outline"></ion-input>
+                </ion-col>
+
+                <ion-col size="12" class="ion-padding-vertical">
+                    <ion-label position="stacked" class="text-uppercase">Circunscripción*</ion-label>
+                    <ion-input type="email" formControlName="circunscripcion" fill="outline"></ion-input>
+                </ion-col>
+
+                <ion-col size="12" class="ion-padding-vertical">
+                    <ion-label position="stacked" class="text-uppercase">Bancada*</ion-label>
+                    <ion-select formControlName="bancada" label-placement="stacked" fill="outline">
+                        <ion-select-option *ngFor="let item of bancadasList" [value]="item.id">{{ item.nombre }}</ion-select-option>
+                    </ion-select>
+                </ion-col>
+
+                <ion-col size="12" class="ion-padding-vertical">
+                    <ion-label position="stacked" class="text-uppercase">Partido*</ion-label>
+                    <ion-select formControlName="partido" label-placement="stacked" fill="outline">
+                        <ion-select-option *ngFor="let item of partidosList" [value]="item.id">{{ item.nombre }}</ion-select-option>
+                    </ion-select>
+                </ion-col>
+
+                <ion-col size="12" class="ion-padding-vertical">
+                    <ion-label position="stacked" class="text-uppercase">Perfil Usuario/a*</ion-label>
+                    <ion-select formControlName="perfil" label-placement="stacked" fill="outline">
+                        <ion-select-option *ngFor="let item of typeProfilesList" [value]="item.id">{{ item.nombre }}</ion-select-option>
+                    </ion-select>
+                </ion-col>
+            </ion-row>
+        </form>
+
+
+        <ion-row>
+            <ion-col size="12" class="ion-no-padding text-center">
+                <ion-button color="secondary" [disabled]="formUser.invalid" (click)="onEditUser()">
+                    Guardar
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>

@@ -32,9 +32,9 @@
     Cambiar Contraseña
     <mat-icon>lock</mat-icon>
   </button>
-    <button *ngIf="this.userLogin?.perfil !== 1" mat-menu-item (click)="routerEdit(this.userLogin?.perfil!,this.userLogin?.usuario_id!)">
-    Editar perfil
-    <mat-icon>edit</mat-icon>
+    <button mat-menu-item routerLink="/dashboard/misdatos">
+    Editar Perfil
+    <mat-icon>manage_accounts</mat-icon>
   </button>
     <button mat-menu-item (click)="cerrarSessionUser()">
     Cerrar Sesion

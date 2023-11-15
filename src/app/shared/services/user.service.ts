@@ -4,14 +4,8 @@ import { Observable, map } from 'rxjs';
 import { ApiService } from './api.service';
 import { getToken, removeUserToken } from '../helpers/auth.helpers';
 import { Router } from '@angular/router';
-import { ChangePasswordModel, PasswordRecoverModel } from '../interfaces';
-import {
-  IApiRequestAssignTeams,
-  IApiRequestRemoveAssign,
-  IApiResponseTypeProfile,
-  IApiResponseUsers,
-  IApiFilterCommon,
-} from '../interfaces';
+import { ChangePasswordModel, IApiFilterParties, IApiResponseParties, IApiResponseUserID, PasswordRecoverModel } from '../interfaces';
+import { IApiFilterCommon } from '../interfaces';
 
 
 @Injectable({
@@ -35,59 +29,7 @@ export class UserService {
     }));
   }
 
-  /*getProfiles(): Observable<IApiResponseTypeProfile[]> {
-    const url = `${this._urlBase}usuario/perfiles/`;
-    return this._restClientService.get<IApiResponseTypeProfile[]>(
-      url,
-      null,
-      'Error al consultar el listado de perfiles, intente nuevamente o contacte al administrador del sistema.'
-    );
+  getProfiles(): Observable<any> {
+    return this.apiService.get(`${this.path}/usuario/perfiles/`);
   }
-
-
-
-  getUserByID(id: number): Observable<IApiResponseUsers> {
-    const url = `${this._urlBase}usuario/`;
-    return this._restClientService.getId(
-      url,
-      id,
-      'Error al consultar la información del usuario. intente nuevamente o contacte al administrador del sistema.'
-    );
-  }
-
-  updateUsers(body: IBodyModel, id: number): Observable<IApiResponseUsers> {
-    const url = `${this._urlBase}usuario/${id}/`;
-    return this._restClientService.upLoadFile<IApiResponseUsers>(
-      'PUT',
-      url,
-      body,
-      'Error al editar el usuario, intente nuevamente o contacte al administrador del sistema.'
-    );
-  }
-
-  assignTeams(
-    body: IApiRequestAssignTeams[]
-  ): Observable<IApiResponseMessageCommon> {
-    const url = `${this._urlBaseAdmin}equipo/asignar/`;
-    return this._restClientService.post<IApiResponseMessageCommon>(
-      url,
-      body,
-      'Error al asignar los usuarios al equipo, intente nuevamente o contacte al administrador del sistema.'
-    );
-  }
-
-  removeUserTeams(
-    body: IApiRequestRemoveAssign,
-    id: number
-  ): Observable<IApiResponseMessageCommon> {
-    const url = `${this._urlBaseAdmin}equipo/remover-miembro/`;
-    return this._restClientService.delete<IApiResponseMessageCommon>(
-      url,
-      id,
-      body,
-      'Error al eliminar el usuario del equipo, intente nuevamente o contacte al administrador del sistema.'
-    );
-  }
-
-  */
 }

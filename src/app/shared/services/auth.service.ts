@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { getToken, removeUserToken } from '../helpers/auth.helpers';
 import { Router } from '@angular/router';
-import { ChangePasswordModel, PasswordRecoverModel } from '../interfaces';
+import { ChangePasswordModel, IApiResponseUserID, PasswordRecoverModel } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -48,5 +48,23 @@ export class AuthService {
 
   userHasToken() {
     return getToken() !== '' ? true : false;
+  }
+
+  getUserByID(id:number): Observable<any>{
+    return this.ApiService.get(`${this.prefijoRuta}/usuario/${id}`);
+  }
+
+  /*updateUsers(data: any, id: number): Observable<any> {
+    return this.ApiService.put(`${this.prefijoRuta}/usuario/${id}/`, data);
+  }*/
+
+  updateUsers(body: any, id: number): Observable<any> {
+    const url = `${this.prefijoRuta}/usuario/${id}/`;
+    return this.ApiService.upLoadFile<any>(
+      'PUT',
+      url,
+      body,
+      'Error al editar el usuario, intente nuevamente o contacte al administrador del sistema.'
+    );
   }
 }
