@@ -4,7 +4,8 @@ import {
   NonNullableFormBuilder,
   Validators
 } from '@angular/forms';
-import { AdministrationService, AuthService, CustomValidations, emailPattern, FALLBACK, getLocalStorageUser, IApiFilterParties, IApiResponseBenches, IApiResponseParties, IApiResponseTypeProfile, IApiResponseUserID, IUserHomeForm, numbersPattern, PageResultModel, rutRegexPattern, UserService } from '@app/shared';
+import { Router } from '@angular/router';
+import { AdministrationService, AuthService, CustomValidations, emailPattern, FALLBACK, getLocalStorageUser, IApiFilterParties, IApiResponseBenches, IApiResponseParties, IApiResponseTypeProfile, IApiResponseUserID, IUserHomeForm, numbersPattern, PageResultModel, rutRegexPattern } from '@app/shared';
 import * as moment from 'moment';
 import { forkJoin } from 'rxjs';
 
@@ -19,9 +20,9 @@ export class MisDatosPage implements OnInit {
   public userLogin: IApiResponseUserID | null = null;
   public formUser!: FormGroup<IUserHomeForm>;
   private _fb: NonNullableFormBuilder = inject(NonNullableFormBuilder);
-  private _userService: UserService = inject(UserService);
   private _administrationService: AdministrationService = inject(AdministrationService);
   private _authService: AuthService = inject(AuthService);
+  private _router: Router = inject(Router);
   public previewImage: string | undefined = '';
   public bancadasList: IApiResponseBenches[] = [];
   public partidosList: IApiResponseParties[] = [];
@@ -31,9 +32,9 @@ export class MisDatosPage implements OnInit {
   public imgURL: any | null = null;
   public isShowResult: boolean = false;
   public messageResult: PageResultModel = {
-    icon: 'user',
+    icon: 'person',
     title: 'Usuario/a Actualizado',
-    subTitle: 'El usuario/a se actualizó con éxito',
+    subTitle: '¡El usuario/a se actualizó con éxito!',
     showButton: true,
     buttonLabel: 'Volver',
   };
@@ -60,7 +61,7 @@ export class MisDatosPage implements OnInit {
 
   _initialFuctions() {
     forkJoin([
-      this._userService.getProfiles(),
+      this._authService.getProfiles(),
       this._administrationService.getBenchesList(),
     ]).subscribe({
       next: ([profiles, benches]) => {
@@ -189,5 +190,10 @@ export class MisDatosPage implements OnInit {
   uploadPhoto(image: any) {
     this.formControls.imagen.setValue(image);
     this.imgURL = !image ? 'https://ionicframework.com/docs/img/demos/avatar.svg' : image;
+  }
+
+  reload() {
+    this.isShowResult = false;
+    this._router.navigate(['/dashboard/home/']);
   }
 }

@@ -1,5 +1,5 @@
 <ion-content class="content-principal ion-padding content-mis-datos">
-    <ion-grid class="custom_container">
+    <ion-grid class="custom_container" *ngIf="!isShowResult">
         <ion-row>
             <ion-col size="12" class="titulo-modulo">
                 Mis Datos
@@ -73,4 +73,6 @@
         </ion-row>
 
     </ion-grid>
+
+    <dynamic-page-result *ngIf="isShowResult" [message]="messageResult" (onClickBtn)="reload();"></dynamic-page-result>
 </ion-content>
