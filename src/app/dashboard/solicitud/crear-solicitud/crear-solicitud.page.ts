@@ -27,9 +27,9 @@ export class CrearSolicitudPage implements OnInit {
   public isShowResult: boolean = false;
   public selectedDate: Date | null = null;
   public messageResult: PageResultModel = {
-    icon: 'checkmark-circle-outline',
+    icon: 'document-text',
     title: 'Datos Guardados',
-    subTitle: 'La solicitud se generó exitosamente.',
+    subTitle: '¡La solicitud se generó exitosamente!',
     showButton: true,
     buttonLabel: 'Volver',
   };

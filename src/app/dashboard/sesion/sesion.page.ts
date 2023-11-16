@@ -3,7 +3,7 @@ import {
   FormGroup,
   FormBuilder
 } from '@angular/forms';
-import { Sesion, IApiFilterCommon, UserService, ListData, IApiResponseUsers, SesionService } from '@app/shared';
+import { Sesion, IApiFilterCommon, AuthService, ListData, IApiResponseUsers, SesionService } from '@app/shared';
 import * as moment from 'moment';
 import {  } from '@app/shared';
 import { Router } from '@angular/router';
@@ -17,16 +17,16 @@ export class SesionPage implements OnInit {
   formData: FormGroup;
   dataSesion: Sesion = new Sesion();
   selectedDate: Date | null = null;
-  private _userService: UserService = inject(UserService);
+  private _authService: AuthService = inject(AuthService);
   private _sesionService: SesionService = inject(SesionService);
   private _router: Router = inject(Router);
   public selected: Date | null = null;
   public users: ListData | null = null;
   public isShowResult: boolean = false;
   public messageResult = {
-    icon:'checkmark-circle-outline',
+    icon:'checkmark-circle',
     title:'Sesión Agendada',
-    subTitle:'Su sesión ',
+    subTitle:'¡Su sesión fue agregada con exito!',
     showButton: true,
     buttonLabel: 'Volver'
   }
@@ -59,7 +59,7 @@ export class SesionPage implements OnInit {
   }
 
   private _getUsers(filters:IApiFilterCommon | null){
-    this._userService.getUsers(filters).subscribe({
+    this._authService.getUsers(filters).subscribe({
       next:(response) => {
         this.users = new ListData(response, true, 10);
       }
