@@ -42,9 +42,14 @@ const routes: Routes = [
         path: 'misdatos',
         loadChildren: () =>
           import('./mis-datos/mis-datos.module').then((m) => m.MisDatosPageModule),
+      },
+      {
+        path: 'cambiar-contrasenna',
+        loadChildren: () => import('./cambiar-contrasenna/cambiar-contrasenna.module').then( m => m.CambiarContrasennaPageModule)
       }
     ],
   }
+
 ];
 
 @NgModule({

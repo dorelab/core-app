@@ -18,18 +18,5 @@ export class UserService {
     private apiService: ApiService,
   ) {}
 
-  getUsers(filters: IApiFilterCommon | null): Observable<any> {
-    return this.apiService.get(`${this.path}/usuario/`).pipe(map((data) => this._transformUserList(data)));
-  }
 
-  private _transformUserList(data: any): any {
-    return data.map((item: any) => ({
-      ...item,
-      display_bancada: item.bancada.nombre,
-    }));
-  }
-
-  getProfiles(): Observable<any> {
-    return this.apiService.get(`${this.path}/usuario/perfiles/`);
-  }
 }
