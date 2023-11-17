@@ -17,6 +17,11 @@ export interface AlertFiltersForm {
   tipo: FormControl<number|string>;
 }
 
+export interface AlertFiltersHeaderModel {
+  usuario__id: number;
+  visto: boolean;
+}
+
 export interface AlertTypeModel {
   readonly id: number;
   readonly nombre: string;

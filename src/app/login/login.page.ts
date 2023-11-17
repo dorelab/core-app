@@ -82,6 +82,7 @@ export class LoginPage implements OnInit {
         );
 
         this.store.dispatch(fromActions.loadDataUserLogin({ payload: data }));
+        this.store.dispatch(fromActions.loadUserAlerts({filters: { usuario__id: data.usuario_id, visto: false}}));
         this.router.navigate(['/dashboard/home']);
 
         return true;

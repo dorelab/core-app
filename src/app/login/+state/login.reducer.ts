@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as LoginActions from './login.actions';
-import { UserLoginModel } from '@app/shared';
+import { AlertFiltersHeaderModel, AlertModel, UserLoginModel } from '@app/shared';
 import { environment } from 'src/environments/environment';
 
 export const loginFeatureKey = 'login';
@@ -8,7 +8,8 @@ export const loginFeatureKey = 'login';
 export interface State {
   user: UserLoginModel | null;
   error: any;
-  userId: number | null
+  filters: AlertFiltersHeaderModel | null;
+  alerts: AlertModel[] | null;
 }
 
 export const initialState: State = {
@@ -18,7 +19,12 @@ export const initialState: State = {
       )
     : null,
   error: null,
-  userId: null
+  filters: null,
+  alerts: localStorage.getItem(environment.storageAlerts)
+    ? JSON.parse(
+        localStorage.getItem(environment.storageAlerts) as string
+      )
+    : null
 };
 
 export const reducer = createReducer(
@@ -37,7 +43,17 @@ export const reducer = createReducer(
   on(LoginActions.loadLoginsFailure, (state, { error }) => ({
     ...state,
     error,
-  }))
+  })),
+
+  on(LoginActions.loadUserAlerts, (state, { filters }) => ({
+    ...state,
+    filters,
+  })),
+
+  on(LoginActions.loadUserAlertsSuccess, (state, { payload }) => ({
+    ...state,
+    alerts: payload,
+  })),
 );
 
 export const loginFeature = createFeature({

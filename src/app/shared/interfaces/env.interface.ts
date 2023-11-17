@@ -4,4 +4,5 @@ export interface EnvironmentModel{
     urlApi:string;
     urlFiles:string;
     nameLocalStorageInfoUser:string;
+    storageAlerts:string;
 }

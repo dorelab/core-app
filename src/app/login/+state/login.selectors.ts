@@ -10,7 +10,7 @@ export const getUserLogin = createSelector(
   (state:fromLogin.State)=>state.user
 )
 
-export const getUserID = createSelector(
+export const getNotifications = createSelector(
   selectLoginState,
-  (state: fromLogin.State) => state.userId
+  (state: fromLogin.State) => state.alerts
 );

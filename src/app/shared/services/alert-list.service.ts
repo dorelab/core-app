@@ -17,4 +17,8 @@ export class AlertListService {
   deleteAlerts(id: number): Observable<any> {
     return this.apiService.delete(`${this.path}/alerta/${id}`);
   }
+
+  changeStatusAlert(id: number): Observable<any> {
+    return this.apiService.put(`${this.path}/alerta/marcar_visto/${id}/`);
+  }
 }

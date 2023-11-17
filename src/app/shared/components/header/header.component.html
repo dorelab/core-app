@@ -8,7 +8,7 @@
 
         <ion-buttons slot="end">
             <ion-button mat-button [matMenuTriggerFor]="menuNotifications" class="notificacion">
-                <ion-badge color="primary" *ngIf="countNotifications > 0"></ion-badge>
+                <ion-badge color="primary" *ngIf="countAlerts > 0"></ion-badge>
                 <ion-icon name="notifications"></ion-icon>
             </ion-button>
 
@@ -43,63 +43,47 @@
 </mat-menu>
 
 <!-- NOTIFICACIONES USUARIO -->
-<mat-menu #menuNotifications="matMenu" class="menuNotifications" xPosition="before">
-    <!-- <div class="w-100 d-flex justify-content-end pb-3 pe-3 pt-1">
-    <mat-slide-toggle [(ngModel)]="vista" (click)="changeToggle($event)"
-      >Mostrar las Leídas</mat-slide-toggle
-    >
-  </div>
-
-  <button
-    mat-menu-item
-    *ngFor="let notificacion of (notificaciones$ | async)?.results"
-    class="px-2"
-  >
+<mat-menu #menuNotifications="matMenu" class="menuAlerts" xPosition="before">
     <ion-grid>
-      <ion-row class="ion-justify-content-center ion-align-items-center">
-        <ion-col size="1.5" class="ion-text-center ion-align-self-start pt-2">
-          <mat-icon
-            class="alert-notification mr-0 texto-verde"
-            *ngIf="!notificacion.vista"
-            >notifications_active</mat-icon
-          >
-        </ion-col>
-        <ion-col
-          size="9"
-          class="col-text-notificacion"
-          [ngClass]="{ 'fw-bold': !notificacion.vista }"
-        >
-          <ion-label class="d-inline-block texto-notificacion w-100">
-            {{ notificacion.mensaje }}
-          </ion-label>
-          <ion-label class="d-inline-block fecha-notificacion w-100">
-            {{ notificacion.fecha | date : "dd/MM/YYYY" }},
-            {{ notificacion.fecha | date : "hh:mm a" }}
-          </ion-label>
-        </ion-col>
-        <ion-col size="1.5" class="ion-text-center">
-          <mat-icon
-            class="alert-notification-read mr-0"
-            [matTooltip]="!notificacion.vista ? 'Marcar como Leído' : ''"
-            [ngClass]="{ 'texto-verde': !notificacion.vista }"
-            (click)="
-              !notificacion.vista
-                ? marcarLeido(notificacion, $event)
-                : $event.stopPropagation()
-            "
-            >done_all</mat-icon
-          >
-        </ion-col>
-      </ion-row>
+        <ion-row class="mb-2">
+            <ion-col size="6" class="header-alerts">
+                Alertas
+            </ion-col>
+            <ion-col size="6" class="togglLeidas d-flex ion-justify-content-end">
+                <mat-slide-toggle [(ngModel)]="vista" (click)="changeToggle($event)">Mostrar las Leídas</mat-slide-toggle>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" class="px-2">
+                <ion-card class="card-list" *ngFor="let alert of (alerts$ | async)" class="px-2">
+                    <ion-card-content class="ion-no-padding">
+                        <ion-row>
+                            <ion-col size="12" class="tipo d-flex ion-align-items-center">
+                                <ion-icon name="chatbox-ellipses" class="icon-chat me-2"></ion-icon>
+                                {{ alert.tipo }}
+                            </ion-col>
+                            <ion-col size="12" class="descripcion">
+                                {{ alert.descripcion }}
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="ion-justify-content-center ion-align-items-center">
+                            <ion-col [size]="!alert.visto ? 6 : 12" class="fecha">
+                                {{ alert.fecha | date : "dd/MM/YYYY" }}, {{ alert.fecha | date : "hh:mm a" }}
+                            </ion-col>
+
+                            <ion-col size="6" *ngIf="!alert.visto" class="btn-alert d-flex ion-justify-content-end">
+                                <ion-button mat-button color="primary" (click)="marcarLeido(alert, $event)">
+                                    <ion-icon name="checkmark-done-outline" class="me-2"></ion-icon>
+                                    Marcar Leída
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+
+        </ion-row>
     </ion-grid>
-  </button>
-  <mat-paginator
-    class="paginator-notificaciones"
-    [length]="(notificaciones$ | async)?.count"
-    [pageSize]="10"
-    [showFirstLastButtons]="false"
-    [hidePageSize]="true"
-    (page)="onPaginateChange($event)"
-    (click)="$event.stopPropagation()"
-  ></mat-paginator> -->
 </mat-menu>

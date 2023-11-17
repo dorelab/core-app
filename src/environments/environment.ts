@@ -7,6 +7,7 @@ export const environment: EnvironmentModel = {
     urlApi: 'http://127.0.0.1:8000/api/v1',
     urlFiles: 'http://127.0.0.1:8000/',
     nameLocalStorageInfoUser: 'currentUserCORE',
+    storageAlerts: 'alertsUser',
 };
 
 export const ENVIRONMENT:InjectionToken<EnvironmentModel> = new InjectionToken('env');
