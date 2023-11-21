@@ -10,10 +10,20 @@
 
 <ion-content class="ion-no-padding">
     <ion-grid fixed>
-        <ion-row class="ion-justify-content-center">
-            <ion-col size="12" class="title-modal mb-4">
-                VOTAR
+        <ion-row class="ion-justify-content-center mb-4">
+            <ion-col size-xs="12" class="title-modal text-center h4">
+                Votar
             </ion-col>
         </ion-row>
     </ion-grid>
 </ion-content>
+
+<ion-footer>
+    <ion-row class="ion-justify-content-center ion-align-items-center px-3 py-2 ion-text-end">
+        <ion-col size="12">
+            <ion-button class="btn-verde" [disabled]="true" (click)="saveData()">
+                Guardar
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-footer>
