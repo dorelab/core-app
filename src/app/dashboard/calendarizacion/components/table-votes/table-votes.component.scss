@@ -1,0 +1,48 @@
+.content-table-votes {
+    ion-card {
+        ion-row {
+            ion-col {
+                border: 1px solid #EAECF0;
+                min-height: 50px;
+                align-items: center;
+                padding: 0.5rem 0.8rem;
+                display: flex;
+            }
+            .titulo-card {
+                font-weight: bold;
+                background-color: #EDF5F5;
+                color: #232D42;
+            }
+            .detalle-card {
+                background-color: #FFFFFF;
+                font-family: 'Mulish-Regular';
+                .numbers_vote {
+                    font-size: 20px;
+                    margin-right: 6px;
+                    color: #232D42;
+                }
+                .type_vote {
+                    font: 12px;
+                    color: #848181;
+                    vertical-align: middle;
+                }
+                &.nombre {
+                    text-decoration: underline;
+                    color: #232D42;
+                }
+                &.border-left-none {
+                    border-left-width: 0;
+                }
+                &.border-right-none {
+                    border-right-width: 0;
+                }
+                &.border-top-none {
+                    border-top-width: 0;
+                }
+                &.border-bottom-none {
+                    border-bottom-width: 0;
+                }
+            }
+        }
+    }
+}
