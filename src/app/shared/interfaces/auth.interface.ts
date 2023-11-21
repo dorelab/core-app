@@ -27,6 +27,7 @@ export interface UserLoginModel {
   perfil_nombre: string;
   modulos: any[];
   msj: string;
+  imagen: string;
   success: number;
   first_time: boolean;
   last_login: Date;

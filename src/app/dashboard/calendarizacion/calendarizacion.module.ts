@@ -8,6 +8,9 @@ import { CalendarizacionPageRoutingModule } from './calendarizacion-routing.modu
 
 import { CalendarizacionPage } from './calendarizacion.page';
 import { ModalVotarComponent } from './components/modal-votar/modal-votar.component';
+import { ModalSesionComponent } from './components/modal-sesion/modal-sesion.component';
+import { TableVotesComponent } from './components/table-votes/table-votes.component';
+
 import { SharedModule } from '@app/shared';
 
 @NgModule({
@@ -20,7 +23,9 @@ import { SharedModule } from '@app/shared';
   ],
   declarations: [
     CalendarizacionPage,
-    ModalVotarComponent
+    ModalVotarComponent,
+    ModalSesionComponent,
+    TableVotesComponent
   ]
 })
 export class CalendarizacionPageModule {}

@@ -1,7 +1,7 @@
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { IApiFilterParties } from '../interfaces';
+import { IAPIFilterSession, IApiFilterCommon, IApiFilterParties, IApiResponseCommittessList } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,26 @@ export class AdministrationService {
     return this.apiService.get(`${this.path}/partido-politico/`, filter);
   }
 
-  /*uploadDocs(body: IBodyModel): Observable<> {
-    return this.apiService.post(`${this.path}/documento/`, body);
-  }*/
+  getSesions(filter: IAPIFilterSession | null): Observable<any> {
+    return this.apiService.get(`${this.path}/sesion/`, filter);
+  }
+
+  getCommittees(filters: IApiFilterCommon | null): Observable<any> {
+    return this.apiService.get(`${this.path}/equipo/`, filters).pipe(map((data) => this.transformCommittees(data)));
+  }
+
+  getCallById(id: number | string): Observable<any> {
+    return this.apiService.get(`${this.path}/convocatoria/${id}`);
+  }
+
+  transformCommittees(data: any): any {
+    return {
+      ...data,
+      results: data.results.map((item: any) => ({
+        ...item,
+        display_type: item.tipo ? item.tipo.descripcion : '',
+      })),
+    };
+  }
+
 }

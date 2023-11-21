@@ -17,9 +17,11 @@
                     <ion-label class="ion-text-capitalize ion-text-wrap nombre-asesor">
                         {{ userLogin?.nombre !== "" ? userLogin?.nombre : "Usuario" }} {{ userLogin?.apellido }}
                     </ion-label>
-                    <ion-avatar>
+                    <ion-avatar *ngIf="userLogin?.imagen === ''">
                         <ion-icon name="person"></ion-icon>
                     </ion-avatar>
+
+                    <img *ngIf="userLogin?.imagen !== ''" class="avatar-user" [src]="userLogin?.imagen" />
                 </ion-chip>
             </ion-button>
         </ion-buttons>

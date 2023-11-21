@@ -76,6 +76,8 @@ export class LoginPage implements OnInit {
           return false;
         }
 
+        data.imagen = `${(data.imagen !== '' ? (environment.urlFiles + data.imagen) : '')}`
+
         localStorage.setItem(
           environment.nameLocalStorageInfoUser,
           JSON.stringify(data)

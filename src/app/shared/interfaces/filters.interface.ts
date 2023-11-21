@@ -9,3 +9,20 @@ export interface IApiFilterCommon {
   readonly partido__nombre__contains?: string;
   readonly bancada__nombre__contains?: string;
 }
+
+export interface IApiFiltersConvocatoria {
+  readonly sesion__asistentes__id?: string;
+  readonly iniciativas__nombre__contains?: string;
+  readonly equipos__id?: string;
+  readonly search?: string;
+}
+
+export interface IAPIFilterSession {
+  readonly convocados__id?: string;
+  readonly iniciativas__nombre__contains?: string;
+  readonly iniciativas__informacion__contains?: string;
+  readonly fecha__gte?: string;
+  readonly fecha__lte?: string;
+  readonly tipo?: string;
+  readonly search?: string;
+}

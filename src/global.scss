@@ -187,6 +187,15 @@ ion-modal.modal-default {
     }
 }
 
+.fc {
+    .fc-daygrid-day.fc-day-today {
+        background-color: rgb(229, 248, 225, 0.5) !important;
+    }
+    .fc-scrollgrid-section-sticky>* {
+        border-width: 1px;
+    }
+}
+
 @media (max-width: 768px) {
     ion-modal.modal-default {
         --width: 90%;

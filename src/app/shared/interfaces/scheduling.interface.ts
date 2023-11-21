@@ -1,3 +1,72 @@
+import { IAPIDocs } from "./administration.interface";
+import { CalendarOptions } from '@fullcalendar/core';
+import interactionPlugin from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import esLocale from '@fullcalendar/core/locales/es';
+
+export const calendarOptions: CalendarOptions = {
+  /*headerToolbar: {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+  },*/
+  initialView: 'timeGridDay',
+    plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
+    //themeSystem: 'bootstrap5',
+    /*views: {
+      timeGridMes: {
+        type: 'dayGridMonth',
+        dayMaxEventRows: 4,
+        buttonText: 'Mes',
+        titleFormat: { year: 'numeric', month: 'short'}
+      },
+      timeGridDia: {
+        type: 'timeGridDay',
+        buttonText: 'Día',
+        titleFormat: { month: 'short', day: 'numeric' }
+      }
+    },*/
+    headerToolbar: {
+      left: 'prevMonth,nextMonth',
+      center: 'prev,next',
+      //left: 'timeGridMes',
+      //center: 'timeGridDia',
+      right: 'title'
+    },
+    slotMinTime: "06:00:00",
+    slotMaxTime: "24:00:00",
+    stickyHeaderDates: true,
+    weekends: true,
+    editable: false,
+    selectable: false,
+    selectMirror: true,
+    dayMaxEvents: true,
+    locale: esLocale,
+    slotLabelFormat: {
+      hour: '2-digit',
+      hour12: true,
+      meridiem: 'short'
+      //meridiem: 'narrow',
+    },
+    eventTimeFormat:{
+      hour: '2-digit',
+      hour12: true,
+      /*
+      hour: 'numeric',
+      minute: '2-digit',
+      meridiem: false,
+      hour12: true,
+      */
+    },
+    titleFormat:{
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    },
+    events: [],
+    height: '600px'
+};
+
 export interface IAPIResponseSesion {
   readonly id: number;
   readonly fecha: string;
@@ -69,6 +138,77 @@ export interface IAPIDataAttendance {
   readonly total_convocados: number;
 }
 
+export interface IAPIRequestVote {
+  readonly opcion: number;
+  readonly iniciativa: number;
+  readonly consejero: number;
+}
+
+export interface IAPIResponseVote extends IAPIRequestVote{
+  readonly id:number;
+}
+
+export interface IAPIResponseSesionComplete {
+  readonly id: number;
+  readonly fecha: string;
+  readonly hora_inicio: string;
+  readonly hora_fin: string;
+  readonly tipo: TSessionType;
+  readonly subtipo: number;
+  readonly invitacion: string;
+  readonly estatus: TStatusSession;
+  readonly convocados: IAPISesionAsistente[];
+  readonly iniciativas: {
+    readonly id: number;
+    readonly nombre: string;
+    readonly informacion: string;
+    readonly documentos: IAPIDocs[];
+  }[];
+  readonly convocatoria: {
+    readonly id_convocatoria: number;
+    readonly invitacion: string;
+    readonly link_zoom: string;
+    readonly fecha: string;
+  } | null;
+}
+
+export type TSessionType = 'EXTRAORDINARIA' | 'ORDINARIA' | 'PRIVADA';
+
+export type TStatusSession = 'CREADA' | 'ABIERTA' | 'CERRADA';
+
+export interface UIEventCalendar {
+  id: number;
+  title: string;
+  display: string;
+  start: string;
+  end: string;
+  backgroundColor: string;
+  color: string;
+  borderColor: string;
+  textColor: string;
+  classNames?: string[];
+  extendedProps: UIExtendedProps;
+}
+
+export interface IAPISesionAsistente {
+  readonly id: number;
+  readonly nombre: string;
+  readonly partido: string;
+  readonly bancada: string;
+}
+
+export interface UIExtendedProps {
+  apiData: IAPIResponseSesionComplete;
+}
+
+export interface IVotesIniciative extends IAPIDataVote {
+  display_apruebo: number;
+  display_rechazo: number;
+  display_me_abstengo: number;
+  display_me_inhabilito: number;
+  display_total_votos: number;
+}
+
 export interface IAPIDataVote {
   readonly id: number;
   readonly nombre: string;
@@ -82,16 +222,4 @@ export interface IAPISummatyVote {
   readonly me_abstengo: number;
   readonly me_inhabilito: number;
   readonly total_votos: number;
-}
-
-/** Vote */
-export interface IAPIRequestVote {
-  readonly opcion: number;
-  readonly iniciativa: number;
-  readonly consejero: number;
-}
-
-
-export interface IAPIResponseVote extends IAPIRequestVote{
-  readonly id:number;
 }

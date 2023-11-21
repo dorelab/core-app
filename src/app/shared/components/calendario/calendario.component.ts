@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CalendarOptions, EventSourceInput } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import esLocale from '@fullcalendar/core/locales/es';
+import { IAPIResponseSesionComplete, UIEventCalendar, calendarOptions } from '../../interfaces';
+import { EventImpl } from '@fullcalendar/core/internal';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-calendario',
@@ -12,56 +15,57 @@ import esLocale from '@fullcalendar/core/locales/es';
   styleUrls: ['./calendario.component.scss'],
 })
 export class CalendarioComponent {
-  calendarOptions: CalendarOptions = {
-    initialView: 'timeGridDay',
-    plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
-    themeSystem: 'bootstrap5',
-    /*views: {
-      timeGridMes: {
-        type: 'dayGridMonth',
-        dayMaxEventRows: 4,
-        buttonText: 'Mes',
-        titleFormat: { year: 'numeric', month: 'short'}
-      },
-      timeGridDia: {
-        type: 'timeGridDay',
-        buttonText: 'Día',
-        titleFormat: { month: 'short', day: 'numeric' }
-      }
-    },*/
-    headerToolbar: {
-      left: 'prevMonth,nextMonth',
-      center: 'prev,next',
-      //left: 'timeGridMes',
-      //center: 'timeGridDia',
-      right: 'title'
-    },
-    slotMinTime: "07:00:00",
-    slotMaxTime: "19:00:00",
-    stickyHeaderDates: true,
-    weekends: true,
-    editable: true,
-    selectable: true,
-    selectMirror: true,
-    dayMaxEvents: true,
-    locale: esLocale,
-    slotLabelFormat: {
-      hour: '2-digit',
-      hour12: true,
-      meridiem: 'short'
-    },
-    eventTimeFormat:{
-      hour: '2-digit',
-      hour12: true,
-    },
-    titleFormat:{
-      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
-    },
-    events: [
-      { title: 'event 1', date: '2023-10-12T12:30:00' },
-      { title: 'event 1.2', date: '2023-10-12T14:00:00' },
-      { title: 'event 2', date: '2023-10-13' },
-    ],
-    height: '600px'
-  };
+  @Input() set events(_events: UIEventCalendar[]) {
+    if (_events) {
+      this.options = {
+        ...this.options,
+        events: _events as EventSourceInput,
+      };
+    }
+  }
+
+  @Output() onSelectEvent = new EventEmitter<IAPIResponseSesionComplete>();
+
+  public options: CalendarOptions;
+
+  constructor(private breakpointObserver: BreakpointObserver) {
+    const self = this;
+    this.options = {
+      ...calendarOptions,
+      eventClick: (e) => self._handleClickEvent(e['event']),
+    };
+
+    /*this.breakpointObserver
+      .observe('(max-width: 767px)')
+      .subscribe(({ matches }) => {
+        if (matches) {
+          this.options = {
+            ...this.options,
+            footerToolbar: {
+              start: 'prev,next today',
+            },
+            headerToolbar: {
+              left: 'title',
+              right: 'dayGridMonth,timeGridWeek,timeGridDay',
+            },
+          };
+        } else {
+          this.options = {
+            ...this.options,
+            footerToolbar: false,
+            headerToolbar: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'dayGridMonth,timeGridWeek,timeGridDay',
+            },
+          };
+        }
+      });*/
+  }
+
+  private _handleClickEvent(event: EventImpl) {
+    const { extendedProps } = event;
+    const { apiData } = extendedProps;
+    this.onSelectEvent.emit(apiData);
+  }
 }
