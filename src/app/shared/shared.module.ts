@@ -7,7 +7,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // Components
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { LoaderComponent } from './components/loader/loader.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { DynamicListComponent } from './components/dynamic-list/dynamic-list.component';
 import { DynamicFilterComponent } from './components/dynamic-filter/dynamic-filter.component';
@@ -58,7 +57,6 @@ registerLocaleData(localeEs)
   declarations: [
     HeaderComponent,
     MenuComponent,
-    LoaderComponent,
     CalendarioComponent,
     DynamicFilterComponent,
     DynamicPageResultComponent,
@@ -98,7 +96,6 @@ registerLocaleData(localeEs)
   exports: [
     HeaderComponent,
     MenuComponent,
-    LoaderComponent,
     CalendarioComponent,
     DynamicFilterComponent,
     DynamicPageResultComponent,

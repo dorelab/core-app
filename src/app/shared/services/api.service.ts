@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, last, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AlertsService } from './alerts.service';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class ApiService {
   private route = `${environment.urlApi}`;
   private headersToSend = new HttpHeaders();
   private _AlertsService: AlertsService = inject(AlertsService);
+  private _LoaderService: LoaderService = inject(LoaderService);
 
   constructor(
     private http:HttpClient,
