@@ -33,7 +33,7 @@ export class LoaderService {
       }).catch((err) => {
         console.log('Error occured : ', err);
       });
-    }, 500);
+    }, 700);
 
     /*if(this.controlerLoader) {
       await this.loadingController.dismiss().then((response) => {

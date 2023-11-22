@@ -36,6 +36,10 @@ export class AdministrationService {
     return this.apiService.get(`${this.path}/convocatoria/${id}`);
   }
 
+  getIniciativaById(id: number): Observable<any> {
+    return this.apiService.get(`${this.path}/iniciativa/${id}`);
+  }
+
   transformCommittees(data: any): any {
     return {
       ...data,

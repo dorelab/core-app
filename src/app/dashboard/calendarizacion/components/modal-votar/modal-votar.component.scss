@@ -1,5 +1,43 @@
-.modal-votar {
+::ng-deep .modal-votar {
     .title-modal {
         color: #0C3A5C;
+        font-size: 2rem;
+    }
+    .titulo-card {
+        font-weight: bold;
+        color: #232D42;
+    }
+    .detalle-card {
+        font-family: 'Mulish-Regular';
+        margin-bottom: 1rem;
+        color: #101828;
+        &.nombre {
+            text-decoration: underline;
+            color: #232D42;
+        }
+    }
+    .btn-modal-votar {
+        width: 150px;
+    }
+    .radio-group-votes {
+        ion-radio {
+            --border-radius: 4px;
+            --inner-border-radius: 2px;
+            --color: #ddd;
+            font-size: 14px;
+            margin-inline: 0;
+            .radio-inner {
+                --border-width: 4px;
+            }
+        }
+        ion-radio::part(container) {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        .item-native {
+            padding-inline-start: 0;
+        }
     }
 }
