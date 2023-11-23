@@ -1,9 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AdministrationService, ControlModalService, IAPIFilterSession, IAPIResponseSesionComplete, IApiFilterCommon, IApiFiltersConvocatoria, IApiResponseCommittees, IApiResponseUserID, TStatusSession, UIEventCalendar, getLocalStorageUser } from '@app/shared';
-import { ModalVotarComponent } from './components/modal-votar/modal-votar.component';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { map } from 'rxjs';
 import { ModalSesionComponent } from './components/modal-sesion/modal-sesion.component';
+import { ModalSesionActivaComponent } from './components/modal-sesion-activa/modal-sesion-activa.component';
+import { ModalVotarComponent } from './components/modal-votar/modal-votar.component';
 
 @Component({
   selector: 'app-calendarizacion',
@@ -23,6 +24,7 @@ export class CalendarizacionPage implements OnInit {
   public dataModals: any = {
     'votar': {component: ModalVotarComponent, class: 'modal-votar'},
     'sesion': {component: ModalSesionComponent, class: 'modal-sesion'},
+    'sesion-activa': {component: ModalSesionActivaComponent, class: 'modal-sesion-activa'},
   };
 
   constructor(
@@ -129,24 +131,10 @@ export class CalendarizacionPage implements OnInit {
     } else if (event.estatus === 'CREADA'){
       this.openModal(event, 'sesion');
 
-    }/*else if(event.estatus === 'CERRADA'){
-      const modal = this._modal.create<ModalActiveSessionAdviserComponent, any>({
-        nzTitle: undefined,
-        nzContent: ModalActiveSessionAdviserComponent,
-        nzViewContainerRef: this._viewContainerRef,
-        nzWidth: 900,
-        nzCentered: true,
-        nzClosable: true,
-        nzMaskClosable: false,
-        nzData: {
-          sessionID: event.id,
-          userLogin:this.userData
-        },
-        nzFooter: null,
-      });
+    } else if (event.estatus === 'CERRADA'){
+      this.openModal(event, 'sesion-activa');
 
-      const instance = modal.getContentComponent();
-    }*/
+    }
   }
 
   openModal(data: IAPIResponseSesionComplete, tipo: string) {

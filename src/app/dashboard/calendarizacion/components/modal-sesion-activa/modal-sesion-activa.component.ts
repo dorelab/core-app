@@ -1,20 +1,22 @@
-import { Component, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AdministrationService, IAPIResponseSesion, IAPISummarySession, IApiResponseConvocatoria, IApiResponseUserID, IVotesIniciative, SesionService } from '@app/shared';
 import { ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-modal-sesion',
-  templateUrl: './modal-sesion.component.html',
-  styleUrls: ['./modal-sesion.component.scss'],
+  selector: 'app-modal-sesion-activa',
+  templateUrl: './modal-sesion-activa.component.html',
+  styleUrls: ['./modal-sesion-activa.component.scss'],
 })
-export class ModalSesionComponent implements OnInit, OnChanges {
+
+export class ModalSesionActivaComponent implements OnInit {
   public sessionID: number | null = null;
   public userLogin: IApiResponseUserID | null = null;
   public sessionData: IAPIResponseSesion | null = null;
   public callData: IApiResponseConvocatoria | null = null;
-  public loadingSessionData: boolean = false;
   public voteData: IVotesIniciative[] = [];
-  public isLoadingInitiatives: boolean = false;
+  public attendanceRecord: any[] = [];
+  public summarySession: IAPISummarySession | null = null;
+  public asistencia: string = '';
   private _sesionService: SesionService = inject(SesionService);
   private _administrationService: AdministrationService = inject(AdministrationService);
 
@@ -24,11 +26,7 @@ export class ModalSesionComponent implements OnInit, OnChanges {
 
   constructor(
     private modalCtrl: ModalController
-  ) {
-
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {}
+  ) {}
 
   ngOnInit(): void {
     if(this.sessionID) {
@@ -37,7 +35,6 @@ export class ModalSesionComponent implements OnInit, OnChanges {
   }
 
   private _getSessionData(id: number) {
-    this.loadingSessionData = true;
     this._sesionService.getSesionsByID(id).subscribe({
       next: (response) => {
         this.sessionData = response;
@@ -46,7 +43,6 @@ export class ModalSesionComponent implements OnInit, OnChanges {
         }
       },
       complete: () => {
-        this.loadingSessionData = false;
         this._getSummarySession(Number(this.sessionData?.id));
       },
     });
@@ -56,16 +52,15 @@ export class ModalSesionComponent implements OnInit, OnChanges {
     this._administrationService.getCallById(id).subscribe({
       next: (response) => {
         this.callData = response;
-      },
-      complete: () => {
-        this.loadingSessionData = false;
-      },
+      }
     });
   }
 
   private _getSummarySession(id: number) {
     this._sesionService.getSummarySession(id).subscribe({
       next: (response) => {
+        this.summarySession = response;
+        this.attendanceRecord = response.asistentes;
         this.voteData = this._getDataVote(response);
       }
     });
@@ -86,13 +81,5 @@ export class ModalSesionComponent implements OnInit, OnChanges {
 
   closeModal() {
     return this.modalCtrl.dismiss(null, 'cancel');
-  }
-
-  saveData() {
-    const submitData = {
-      body: {},
-    };
-
-    return this.modalCtrl.dismiss(submitData, 'confirm');
   }
 }

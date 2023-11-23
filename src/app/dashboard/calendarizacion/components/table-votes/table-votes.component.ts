@@ -14,8 +14,6 @@ import { IVotesIniciative } from '@app/shared';
 })
 export class TableVotesComponent implements OnChanges {
   @Input({ required: true }) dataSet: IVotesIniciative[] = [];
-
-  public displayedColumns = ['name', 'vote'];
   public dataSource: IVotesIniciative[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {

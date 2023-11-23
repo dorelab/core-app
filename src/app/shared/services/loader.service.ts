@@ -7,7 +7,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class LoaderService {
   isLoading = new Subject<boolean>();
-  controlerLoader: any;
+  controlerLoader: any = false;
 
   constructor(
     public loadingController: LoadingController
@@ -33,7 +33,7 @@ export class LoaderService {
       }).catch((err) => {
         console.log('Error occured : ', err);
       });
-    }, 700);
+    }, 1000);
 
     /*if(this.controlerLoader) {
       await this.loadingController.dismiss().then((response) => {
