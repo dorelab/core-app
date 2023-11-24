@@ -68,11 +68,18 @@
                                 "input": "node_modules/@ionic/angular/css/flex-utils.css"
                             },
                             {
-                                "input": "src/theme/variables.css"
+                                "input": "node_modules/bootstrap/dist/css/bootstrap.min.css"
                             },
-                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "src/theme/variables.scss",
-                            "src/global.scss"
+                            {
+                                "input": "src/theme/variables.scss"
+                            },
+                            {
+                                "input": "src/global.scss"
+                            }
+                        ],
+                        "allowedCommonJsDependencies": [
+                            "moment",
+                            "moment/locale/es"
                         ],
                         "scripts": []
                     },
@@ -80,13 +87,13 @@
                         "production": {
                             "budgets": [{
                                     "type": "initial",
-                                    "maximumWarning": "2mb",
+                                    "maximumWarning": "4mb",
                                     "maximumError": "5mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "2kb",
-                                    "maximumError": "4kb"
+                                    "maximumWarning": "4kb",
+                                    "maximumError": "5kb"
                                 }
                             ],
                             "fileReplacements": [{

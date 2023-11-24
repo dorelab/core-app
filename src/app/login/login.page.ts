@@ -75,8 +75,8 @@ export class LoginPage implements OnInit {
           this.alertsService.openSnackBar('¡Solo pueden Iniciar Sesión los Usuarios Consejeros!', 'error');
           return false;
         }
-
-        data.imagen = `${(data.imagen !== '' ? (environment.urlFiles + data.imagen) : '')}`
+        console.log(data.imagen);
+        data.imagen = `${(!data.imagen ? '' : (environment.urlFiles + data.imagen))}`
 
         localStorage.setItem(
           environment.nameLocalStorageInfoUser,

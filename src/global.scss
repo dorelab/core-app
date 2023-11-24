@@ -77,8 +77,11 @@ body {
     background-color: var(--ion-color-primary) !important;
 }
 
-.card-content-md {
-    font-size: 16px;
+ion-card {
+    --background: #ffffff;
+    .card-content-md {
+        font-size: 16px;
+    }
 }
 
 .content-principal {

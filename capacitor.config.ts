@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'core-app',
+  appId: 'com.cliobyte.core.app',
+  appName: 'CORE App',
   webDir: 'www',
   server: {
     androidScheme: 'https'
