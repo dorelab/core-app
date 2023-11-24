@@ -11,7 +11,7 @@ import * as moment from 'moment';
   styleUrls: ['./crear-solicitud.page.scss'],
 })
 export class CrearSolicitudPage implements OnInit {
-  @Input('sessionID') queryParam!: number;
+  @Input('sessionID') queryParam!: number | null;
   private _RequestService: RequestService = inject(RequestService);
   private _AdministrationService: AdministrationService = inject(AdministrationService);
   private _SesionService: SesionService = inject(SesionService);
@@ -43,7 +43,12 @@ export class CrearSolicitudPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this._getSession(this.queryParam);
+    console.log(this.queryParam);
+
+    if (this.queryParam) {
+      this._getSession(this.queryParam);
+    }
+
     this._getListTypesRequests();
     this._buildForm();
   }
@@ -59,7 +64,7 @@ export class CrearSolicitudPage implements OnInit {
   private _buildForm(): void {
     this.formRequest = this._fb.group<RequestForm>(
       {
-        sesion: this._fb.control(this.dataSession.id !== undefined ? this.dataSession.id : 0, {validators: [Validators.required]}),
+        sesion: this._fb.control(this.dataSession.id !== undefined ? this.dataSession.id : null, {validators: []}),
         tipo: this._fb.control(null, { validators: [Validators.required]}),
         descripcion: this._fb.control('', { validators: [Validators.required]}),
         observaciones: this._fb.control('', { validators: [Validators.required]}),

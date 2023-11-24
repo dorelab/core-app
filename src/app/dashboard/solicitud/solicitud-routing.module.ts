@@ -8,6 +8,10 @@ const routes: Routes = [
     component: SolicitudPage,
     children: [
       {
+        path: 'crear',
+        loadChildren: () => import('./crear-solicitud/crear-solicitud.module').then( m => m.CrearSolicitudPageModule)
+      },
+      {
         path: 'crear/:sessionID',
         loadChildren: () => import('./crear-solicitud/crear-solicitud.module').then( m => m.CrearSolicitudPageModule)
       },

@@ -49,7 +49,7 @@ export interface RequestForm {
   fecha_solicitud: FormControl<string>;
   fecha_limite: FormControl<string>;
   consejero: FormControl<number | null>;
-  sesion: FormControl<number>;
+  sesion: FormControl<number | null>;
   archivo_: FormControl<string>;
 }
 
