@@ -34,7 +34,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.userLogin$.subscribe((u) => {
       this.userLogin = u;
-      this.filtrarMenu();
+      //this.filtrarMenu();
     });
   }
 
