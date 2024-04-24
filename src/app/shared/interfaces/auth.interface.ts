@@ -40,7 +40,7 @@ export interface IApiResponseUserID{
   readonly rut:             string;
   readonly telefono:        string;
   readonly partido:         IApiResponseDetailKey;
-  readonly circunscripcion: string;
+  readonly circunscripcion: IApiResponseDetailKey;
   readonly bancada:         IApiResponseDetailKey;
   readonly imagen:          string;
   readonly perfil:          'ADMINISTRADOR' | 'CONSEJERO';

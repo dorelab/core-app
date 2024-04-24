@@ -72,6 +72,11 @@ export interface IApiResponseEquipos {
   readonly tipo: string;
 }
 
+export interface IApiResponseCircunscripciones {
+  readonly id: number;
+  readonly nombre: string;
+}
+
 /*export interface IApiResponseSesion {
   readonly id: number;
   readonly fecha: string;

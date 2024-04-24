@@ -34,9 +34,17 @@ export interface ITypeRequestModel {
   readonly nombre: string;
 }
 
+export interface RequestFiltersModel {
+  consejero__id: number;
+  tipo: number|string;
+  search: string;
+  fecha_solicitud__lte: string;
+  fecha_solicitud__gte: string;
+}
+
 export interface RequestFiltersForm {
   consejero__id: FormControl<number>;
-  tipo: FormControl<number[]>;
+  tipo: FormControl<number|string>;
   search: FormControl<string>;
   fecha_solicitud__lte: FormControl<string>;
   fecha_solicitud__gte: FormControl<string>;

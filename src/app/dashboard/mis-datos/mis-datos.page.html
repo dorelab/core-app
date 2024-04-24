@@ -37,7 +37,9 @@
 
                 <ion-col size="12" class="ion-padding-vertical">
                     <ion-label position="stacked" class="text-uppercase">Circunscripción*</ion-label>
-                    <ion-input type="email" formControlName="circunscripcion" fill="outline"></ion-input>
+                    <ion-select formControlName="circunscripcion" label-placement="stacked" fill="outline">
+                        <ion-select-option *ngFor="let item of circunscripcionList" [value]="item.id">{{ item.nombre }}</ion-select-option>
+                    </ion-select>
                 </ion-col>
 
                 <ion-col size="12" class="ion-padding-vertical">
