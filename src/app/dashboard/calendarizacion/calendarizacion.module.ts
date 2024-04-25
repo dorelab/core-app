@@ -9,7 +9,7 @@ import { CalendarizacionPageRoutingModule } from './calendarizacion-routing.modu
 import { CalendarizacionPage } from './calendarizacion.page';
 import { ModalVotarComponent } from './components/modal-votar/modal-votar.component';
 import { ModalSesionComponent } from './components/modal-sesion/modal-sesion.component';
-import { ModalSesionActivaComponent } from './components/modal-sesion-activa/modal-sesion-activa.component';
+import { ModalSesionResumenComponent } from './components/modal-sesion-resumen/modal-sesion-resumen.component';
 import { TableVotesComponent } from './components/table-votes/table-votes.component';
 import { TableAttendanceComponent } from './components/table-attendance/table-attendance.component';
 
@@ -27,7 +27,7 @@ import { SharedModule } from '@app/shared';
     CalendarizacionPage,
     ModalVotarComponent,
     ModalSesionComponent,
-    ModalSesionActivaComponent,
+    ModalSesionResumenComponent,
     TableVotesComponent,
     TableAttendanceComponent
   ]
