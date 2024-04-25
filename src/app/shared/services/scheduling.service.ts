@@ -17,4 +17,8 @@ export class SchedulingService {
   vote(body: IAPIRequestVote): Observable<any> {
     return this.apiService.post(`${this.path}/voto/`, body);
   }
+
+  getVoteInicitivaByUser(filters: any): Observable<any> {
+    return this.apiService.get(`${this.path}/voto/`, filters);
+  }
 }

@@ -49,4 +49,5 @@ export interface IApiResponseUserID{
   readonly is_staff:        boolean;
   readonly is_superuser:    boolean;
   readonly equipos:         any[];
+  readonly usuario_id:      number;
 }

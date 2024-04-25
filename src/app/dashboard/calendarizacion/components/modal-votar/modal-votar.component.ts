@@ -3,7 +3,7 @@ import { AdministrationService, SchedulingService, AlertsService, IAPIIniciativa
 import { ModalController } from '@ionic/angular';
 import { forkJoin } from 'rxjs';
 
-type TIniciatives = IAPIIniciativa & { vote: number | null }
+type TIniciatives = IAPIIniciativa & { vote: number | null, voto_usuario: string | null }
 
 @Component({
   selector: 'app-modal-votar',
@@ -23,6 +23,7 @@ export class ModalVotarComponent implements OnInit {
   private alertsService: AlertsService = inject(AlertsService);
   private _schedulingService: SchedulingService = inject(SchedulingService);
   public initiatives: TIniciatives[] = [];
+  public votoInitiatives: any[] = [];
 
   get teamsName() {
     return this.callData ? this.callData?.equipos.map((t) => t.nombre).join(', '):'-';
@@ -67,13 +68,23 @@ export class ModalVotarComponent implements OnInit {
 
   private _getInitiatives(ids: number[]) {
     this.isLoadingInitiatives = true;
-    const initiatives$ = ids.map((id) =>
+
+    const initiatives$ = ids.map((id) => 
       this._administrationService.getIniciativaById(id)
     );
 
     forkJoin(initiatives$).subscribe({
       next: (response) => {
-        this.initiatives = response.map((item) => ({ ...item, vote: null }));
+        this.initiatives = response.map((item) => {
+          let votoUsuario = null;
+
+          if (this.userLogin) {
+            votoUsuario = item.votos.filter((voto: any) => (voto.consejero.consejero_id === this.userLogin?.usuario_id));
+          }
+
+          return {...item, vote: votoUsuario.length ? this.returnVotoID(votoUsuario[0].opcion) : null, voto_usuario: votoUsuario.length ? votoUsuario[0].opcion : null };
+
+        });
       },
       complete: () => {
         this.isLoadingInitiatives = false;
@@ -92,10 +103,15 @@ export class ModalVotarComponent implements OnInit {
     }
 
     this._schedulingService.vote({
-      consejero: this.userLogin.id,
+      consejero: this.userLogin.usuario_id,
       iniciativa: item.id,
       opcion: Number(item.vote)
     }).subscribe({
+      next: (response) => {
+        if(response.id && this.sessionID) {
+          this._getSessionData(this.sessionID);
+        }
+      },
       complete: () => {
         this.alertsService.openSnackBar('¡El voto fue asignado correctamente!', 'success');
       }
@@ -112,5 +128,21 @@ export class ModalVotarComponent implements OnInit {
     };
 
     return this.modalCtrl.dismiss(submitData, 'confirm');
+  }
+
+  returnVotoID(votoTexto: string) {
+    if (votoTexto === 'APRUEBO') {
+      return 1;
+
+    } else if (votoTexto === 'RECHAZO'){
+      return 2;
+
+    } else if (votoTexto === 'ME ABSTENGO'){
+      return 3;
+
+    } else {
+      return 4;
+
+    }
   }
 }

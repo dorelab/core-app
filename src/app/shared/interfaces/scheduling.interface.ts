@@ -1,4 +1,4 @@
-import { IAPIDocs } from "./administration.interface";
+import { IAPIDocs, IApiResponseEquipos } from "./administration.interface";
 import { CalendarOptions } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -29,7 +29,7 @@ export const calendarOptions: CalendarOptions = {
       }
     },*/
     headerToolbar: {
-      left: 'prevMonth,nextMonth',
+      left: '',
       center: 'prev,next',
       //left: 'timeGridMes',
       //center: 'timeGridDia',
@@ -75,7 +75,27 @@ export interface IAPIResponseSesion {
   readonly tipo: string;
   readonly subtipo: number;
   readonly invitacion: string;
-  readonly asistentes: IAPISesionAsistente[];
+  readonly estatus: TStatusSession;
+  readonly convocados: IAPISesionAsistente[];
+  readonly iniciativas: {
+    readonly id: number;
+    readonly nombre: string;
+    readonly informacion: string;
+    readonly documentos: IAPIDocs[];
+  }[];
+  readonly convocatoria: {
+    readonly id_convocatoria: number;
+    readonly invitacion: string;
+    readonly link_zoom: string;
+    readonly fecha: string;
+  } | null;
+  readonly equipos: IApiResponseEquipos[];
+  tipo_evento?:TypeEvents;
+}
+
+export enum TypeEvents {
+  'ANNIVERSARIES' = '2',
+  'BIRTHDAY' = '3',
 }
 
 export interface ISesionModel {

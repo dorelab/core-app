@@ -4,8 +4,10 @@ import {
   OnChanges,
   OnInit,
   SimpleChanges,
+  inject,
 } from '@angular/core';
-import { IVotesIniciative } from '@app/shared';
+import { EnvironmentModel, IVotesIniciative } from '@app/shared';
+import { ENVIRONMENT } from 'src/environments/environment';
 
 @Component({
   selector: 'table-votes',
@@ -15,10 +17,10 @@ import { IVotesIniciative } from '@app/shared';
 export class TableVotesComponent implements OnChanges {
   @Input({ required: true }) dataSet: IVotesIniciative[] = [];
   public dataSource: IVotesIniciative[] = [];
+  private _env: EnvironmentModel = inject(ENVIRONMENT);
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.dataSet) {
-      console.log(this.dataSet);
       this.dataSource = this.dataSet;
     }
   }
