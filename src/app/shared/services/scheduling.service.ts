@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Sesion } from '../_class';
 import { Observable } from 'rxjs';
-import { IAPIRequestVote } from '../interfaces';
+import { EventsModelsFilters, IAPIFilterSession, IAPIRequestVote, IAPIResponseSesion } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +20,13 @@ export class SchedulingService {
 
   getVoteInicitivaByUser(filters: any): Observable<any> {
     return this.apiService.get(`${this.path}/voto/`, filters);
+  }
+
+  getSesions(filter: IAPIFilterSession | null): Observable<any> {
+    return this.apiService.get(`${this.path}/sesion/`, filter);
+  }
+
+  getEvents(filters: EventsModelsFilters | null): Observable<any> {
+    return this.apiService.get(`${this.path}/convocatoria/`, filters);
   }
 }

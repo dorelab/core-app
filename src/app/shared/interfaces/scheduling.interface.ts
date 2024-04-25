@@ -196,7 +196,7 @@ export type TSessionType = 'EXTRAORDINARIA' | 'ORDINARIA' | 'PRIVADA';
 
 export type TStatusSession = 'CREADA' | 'ABIERTA' | 'CERRADA';
 
-export interface UIEventCalendar {
+export interface UIEventCalendar<T=any> {
   id: number;
   title: string;
   display: string;
@@ -207,7 +207,7 @@ export interface UIEventCalendar {
   borderColor: string;
   textColor: string;
   classNames?: string[];
-  extendedProps: UIExtendedProps;
+  extendedProps: UIExtendedProps<T>;
 }
 
 export interface IAPISesionAsistente {
@@ -217,8 +217,8 @@ export interface IAPISesionAsistente {
   readonly bancada: string;
 }
 
-export interface UIExtendedProps {
-  apiData: IAPIResponseSesionComplete;
+export interface UIExtendedProps<T> {
+  apiData: T;
 }
 
 export interface IVotesIniciative extends IAPIDataVote {
@@ -242,4 +242,18 @@ export interface IAPISummatyVote {
   readonly me_abstengo: number;
   readonly me_inhabilito: number;
   readonly total_votos: number;
+}
+
+export interface UIEventCalendar<T=any> {
+  id: number;
+  title: string;
+  display: string;
+  start: string;
+  end: string;
+  backgroundColor: string;
+  color: string;
+  borderColor: string;
+  textColor: string;
+  classNames?: string[];
+  extendedProps: UIExtendedProps<T>;
 }
