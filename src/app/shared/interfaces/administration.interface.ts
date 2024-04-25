@@ -64,6 +64,7 @@ export interface IApiResponseConvocatoria {
   readonly fecha: string;
   readonly sesion: IApiResponseTeams;
   readonly equipos: IApiResponseEquipos[];
+  readonly documento_pdf: string;
 }
 
 export interface IApiResponseEquipos {

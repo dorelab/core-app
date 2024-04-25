@@ -19,6 +19,7 @@ export interface IApiFiltersConvocatoria {
 
 export interface IAPIFilterSession {
   readonly convocados__id?: string;
+  readonly nombre?: string;
   readonly iniciativas__nombre__contains?: string;
   readonly iniciativas__informacion__contains?: string;
   readonly fecha__gte?: string;
