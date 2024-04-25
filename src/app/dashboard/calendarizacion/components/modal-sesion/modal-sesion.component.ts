@@ -1,6 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
-import { AdministrationService, IAPIResponseSesion, IAPISummarySession, IApiResponseConvocatoria, IApiResponseUserID, IVotesIniciative, SesionService } from '@app/shared';
+import { AdministrationService, AlertsService, EnvironmentModel, IAPIResponseSesion, IAPISummarySession, IApiResponseConvocatoria, IApiResponseUserID, IVotesIniciative, SesionService } from '@app/shared';
 import { ModalController } from '@ionic/angular';
+import { ENVIRONMENT } from 'src/environments/environment';
 
 @Component({
   selector: 'app-modal-sesion',
@@ -17,9 +18,24 @@ export class ModalSesionComponent implements OnInit, OnChanges {
   public isLoadingInitiatives: boolean = false;
   private _sesionService: SesionService = inject(SesionService);
   private _administrationService: AdministrationService = inject(AdministrationService);
+  private alertsService: AlertsService = inject(AlertsService);
+  private _env: EnvironmentModel = inject(ENVIRONMENT);
 
   get teamsName() {
-    return this.callData ? this.callData?.equipos.map((t) => t.nombre).join(', '):'-'
+    return this.sessionData ? this.sessionData?.equipos.map((t) => t.nombre).join(', ') : '-';
+  }
+
+  get title() {
+    switch (this.sessionData?.estatus) {
+      case 'CREADA':
+        return 'Sesión';
+
+      case 'CERRADA':
+        return 'Sesión Cerrada';
+
+      default:
+        return 'Sesión';
+    }
   }
 
   constructor(
@@ -41,6 +57,7 @@ export class ModalSesionComponent implements OnInit, OnChanges {
     this._sesionService.getSesionsByID(id).subscribe({
       next: (response) => {
         this.sessionData = response;
+
         if(response.convocatoria){
           this._getCallData(response.convocatoria.id_convocatoria);
         }
@@ -56,6 +73,7 @@ export class ModalSesionComponent implements OnInit, OnChanges {
     this._administrationService.getCallById(id).subscribe({
       next: (response) => {
         this.callData = response;
+        console.log(this.callData);
       },
       complete: () => {
         this.loadingSessionData = false;
@@ -88,11 +106,22 @@ export class ModalSesionComponent implements OnInit, OnChanges {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  saveData() {
+  openModalResumen() {
     const submitData = {
-      body: {},
+      openModalResumen: true,
     };
 
     return this.modalCtrl.dismiss(submitData, 'confirm');
+  }
+
+  handlePdf() {
+    //TODO:
+    if (!this.callData?.documento_pdf) {
+      this.alertsService.openSnackBar('¡La convocatoria seleccionada no tiene documento para mostrar!', 'error');
+      return;
+    }
+    
+    const urlRequest = `${this._env.urlFiles}${this.callData.documento_pdf}`;
+    window.open(urlRequest);
   }
 }
