@@ -257,3 +257,15 @@ export interface UIEventCalendar<T=any> {
   classNames?: string[];
   extendedProps: UIExtendedProps<T>;
 }
+
+export interface AttendanceModel {
+  readonly asistencia: boolean;
+  readonly tipo: TipeAttendance;
+  readonly sesion: number;
+  readonly consejero: number;
+}
+
+export enum TipeAttendance {
+  'PRESENCIAL' = 1,
+  'ZOOM',
+}
