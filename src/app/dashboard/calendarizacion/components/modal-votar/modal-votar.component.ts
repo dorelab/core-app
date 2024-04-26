@@ -1,7 +1,8 @@
 import { Component, OnChanges, OnInit, inject } from '@angular/core';
-import { AdministrationService, SchedulingService, AlertsService, IAPIIniciativa, IAPIResponseSesion, IApiResponseConvocatoria, IApiResponseUserID, IVotesIniciative, SesionService, getLocalStorageUser } from '@app/shared';
+import { AdministrationService, SchedulingService, AlertsService, IAPIIniciativa, IAPIResponseSesion, IApiResponseConvocatoria, IApiResponseUserID, IVotesIniciative, SesionService, getLocalStorageUser, TipeAttendance, EnvironmentModel } from '@app/shared';
 import { ModalController } from '@ionic/angular';
 import { forkJoin } from 'rxjs';
+import { ENVIRONMENT } from 'src/environments/environment';
 
 type TIniciatives = IAPIIniciativa & { vote: number | null, voto_usuario: string | null }
 
@@ -22,8 +23,10 @@ export class ModalVotarComponent implements OnInit {
   private _administrationService: AdministrationService = inject(AdministrationService);
   private alertsService: AlertsService = inject(AlertsService);
   private _schedulingService: SchedulingService = inject(SchedulingService);
+  private _env: EnvironmentModel = inject(ENVIRONMENT);
   public initiatives: TIniciatives[] = [];
   public votoInitiatives: any[] = [];
+  public exiteAsistencia = false;
 
   get teamsName() {
     return this.callData ? this.callData?.equipos.map((t) => t.nombre).join(', '):'-';
@@ -37,6 +40,10 @@ export class ModalVotarComponent implements OnInit {
   ngOnInit(): void {
     if(this.sessionID) {
       this._getSessionData(this.sessionID);
+
+      if(this.userLogin) {
+        this._getAttendance(this.userLogin?.usuario_id, this.sessionID);
+      }
     }
   }
 
@@ -143,6 +150,49 @@ export class ModalVotarComponent implements OnInit {
     } else {
       return 4;
 
+    }
+  }
+
+  private _getAttendance(consejero_id: number, sesion_id: number){
+    this._schedulingService.attendanceByUser(consejero_id, sesion_id).subscribe({
+      next:(payload) => {
+        console.log(payload);
+        if(payload && payload.results.length){
+          this.exiteAsistencia = payload.results[0].asistencia
+        }
+      }
+    })
+  }
+
+  marcarAsistencia() {
+    this._schedulingService
+      .attendance({
+        asistencia: true,
+        tipo: TipeAttendance.ZOOM,
+        sesion: this.sessionData?.id!,
+        consejero: Number(this.userLogin?.usuario_id),
+      })
+      .subscribe({
+        next:(payload) => {
+          console.log(payload);
+        },
+        complete: () => {
+          this.alertsService.openSnackBar('La asistencia fue marcada con exito!', 'success');
+        },
+      });
+  }
+
+  openDocuments(iniciativa: TIniciatives) {
+    console.log(iniciativa.documentos);
+    if (!iniciativa.documentos.length) {
+      this.alertsService.openSnackBar('¡La Iniciativa seleccionada no tiene documento para mostrar!', 'error');
+      return;
+    }
+
+    for (const key in iniciativa.documentos) {
+      const documento = iniciativa.documentos[key].documento;
+      const urlRequest = `${this._env.urlFiles}${documento}`;
+      window.open(urlRequest);  
     }
   }
 }

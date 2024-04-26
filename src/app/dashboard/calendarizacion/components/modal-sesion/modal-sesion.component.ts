@@ -115,7 +115,6 @@ export class ModalSesionComponent implements OnInit, OnChanges {
   }
 
   handlePdf() {
-    //TODO:
     if (!this.callData?.documento_pdf) {
       this.alertsService.openSnackBar('¡La convocatoria seleccionada no tiene documento para mostrar!', 'error');
       return;

@@ -6,7 +6,7 @@
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
-    <ion-grid fixed class="px-3">
+    <ion-grid fixed class="px-3 pt-0">
         <ion-row class="ion-justify-content-center mb-3">
             <ion-col size="12" class="title-modal text-center pt-0">
                 Votar
@@ -25,6 +25,25 @@
             <ion-col size="12" class="detalle-card">
                 {{ sessionData?.invitacion }}
             </ion-col>
+
+            <ion-col size="12" class="detalle-card titulo">
+                Asistencia
+            </ion-col>
+
+            <ion-col size="12">
+                <mat-checkbox 
+                    color="primary"
+                    [(ngModel)]="exiteAsistencia"
+                    (change)="marcarAsistencia()"
+                    [disabled]="exiteAsistencia"
+                >
+                    Marcar Asistencia
+                </mat-checkbox>    
+            </ion-col>
+
+            <ion-col size="12" class="detalle-card titulo">
+                Iniciativas
+            </ion-col>
         </ion-row>
 
         <ion-row class="mb-5" *ngFor="let item of initiatives; let i = index">
@@ -37,7 +56,7 @@
             </ion-col>
 
             <ion-col size="12">
-                <ion-button color="primary" class="btn-modal-votar">
+                <ion-button color="primary" class="btn-modal-votar" (click)="openDocuments(item)">
                     Ver
                 </ion-button>
             </ion-col>

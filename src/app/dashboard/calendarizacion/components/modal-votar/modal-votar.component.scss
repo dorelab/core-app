@@ -15,6 +15,12 @@
             text-decoration: underline;
             color: #232D42;
         }
+        &.titulo {
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            color: #101827;
+            border-bottom: 1px solid #DDD;
+        }
     }
     .btn-modal-votar {
         width: 150px;
