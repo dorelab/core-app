@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { AdministrationService, ControlModalService, IAPIFilterSession, IAPIResponseSesionComplete, IApiFilterCommon, IApiFiltersConvocatoria, IApiResponseCommittees, IApiResponseUserID, TStatusSession, UIEventCalendar, getLocalStorageUser } from '@app/shared';
+import { AdministrationService, ControlModalService, EventsModelsFilters, EventsModelsResponse, IAPIFilterSession, IAPIResponseSesionComplete, IApiFilterCommon, IApiFiltersConvocatoria, IApiResponseCommittees, IApiResponseUserID, SchedulingService, TStatusSession, TypeEvents, UIEventCalendar, getLocalStorageUser } from '@app/shared';
 import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
-import { map } from 'rxjs';
+import { forkJoin, map } from 'rxjs';
 import { ModalSesionComponent } from './components/modal-sesion/modal-sesion.component';
-import { ModalSesionActivaComponent } from './components/modal-sesion-activa/modal-sesion-activa.component';
+import { ModalSesionResumenComponent } from './components/modal-sesion-resumen/modal-sesion-resumen.component';
 import { ModalVotarComponent } from './components/modal-votar/modal-votar.component';
 
 @Component({
@@ -14,17 +14,19 @@ import { ModalVotarComponent } from './components/modal-votar/modal-votar.compon
 export class CalendarizacionPage implements OnInit {
   public optionsTeams: IApiResponseCommittees[] = [];
   public currentFilters: IApiFiltersConvocatoria | null = null;
+  public currentEvent: IAPIResponseSesionComplete | null = null;
   public events: UIEventCalendar[] = [];
   private _administrationService: AdministrationService = inject(AdministrationService);
+  private _schedulingService: SchedulingService = inject(SchedulingService);
   public formFilters: FormGroup = inject(NonNullableFormBuilder).group({
-    iniciativas__nombre__contains: [null],
+    nombre: [null],
     equipos__id: [null],
   });
   public userData: IApiResponseUserID | null = null;
   public dataModals: any = {
     'votar': {component: ModalVotarComponent, class: 'modal-votar'},
     'sesion': {component: ModalSesionComponent, class: 'modal-sesion'},
-    'sesion-activa': {component: ModalSesionActivaComponent, class: 'modal-sesion-activa'},
+    'sesion-resumen': {component: ModalSesionResumenComponent, class: 'modal-sesion-resumen'},
   };
 
   constructor(
@@ -34,7 +36,14 @@ export class CalendarizacionPage implements OnInit {
   }
 
   ngOnInit() {
-    this._getEvents(null);
+    this._getEvents(null, [
+      {
+        tipo_evento: TypeEvents.ANNIVERSARIES,
+      },
+      {
+        tipo_evento: TypeEvents.BIRTHDAY,
+      },
+    ]);
     this._getCommittessList(null);
   }
 
@@ -84,15 +93,33 @@ export class CalendarizacionPage implements OnInit {
     }
   }
 
-  private _getEvents(filter: IAPIFilterSession | null) {
-    this._administrationService
-      .getSesions(filter)
-      .pipe(map((data) => this._handleEvents(data)))
-      .subscribe({
-        next: (response) => {
-          this.events = [...response];
+  private _getEvents(filterCalls: IAPIFilterSession | null, filtersSpecialEvents: EventsModelsFilters[]) {
+      forkJoin({
+        calls: this._getCalls(filterCalls),
+        specialEvents: this._getSpecialEvents(filtersSpecialEvents),
+      }).subscribe({
+        next: ({ calls, specialEvents }) => {
+          this.events = [...calls, ...specialEvents];
         },
       });
+  }
+
+  private _getSpecialEvents(filters: EventsModelsFilters[]) {
+    const filters$ = filters.map((filter) =>
+      this._schedulingService.getEvents(filter)
+    );
+
+    return forkJoin(filters$).pipe(
+      map(([anniversaries, birthdays]) =>
+        this._addEvents(anniversaries, birthdays)
+      )
+    );
+  }
+
+  private _getCalls(filter: IAPIFilterSession | null) {
+    return this._schedulingService
+      .getSesions(filter)
+      .pipe(map((data) => this._handleEvents(data)));
   }
 
   private _getCommittessList(filters: IApiFilterCommon | null) {
@@ -101,6 +128,49 @@ export class CalendarizacionPage implements OnInit {
         this.optionsTeams = response.results;
       },
     });
+  }
+
+  private _addEvents(
+    anniversaries: EventsModelsResponse[],
+    birthdays: EventsModelsResponse[]
+  ): UIEventCalendar<EventsModelsResponse>[] {
+    const newEvents: UIEventCalendar<EventsModelsResponse>[] = [];
+
+    anniversaries.forEach((item) => {
+      newEvents.push({
+        id: item.id,
+        title: `${item.nombre}`,
+        display: 'block',
+        start: `${item.efemeride?.fecha}`,
+        end: `${item.efemeride?.fecha}`,
+        backgroundColor: 'green',
+        color: '#FFF',
+        borderColor: 'green',
+        textColor: '#FFF',
+        extendedProps: {
+          apiData: item,
+        },
+      });
+    });
+
+    birthdays.forEach((item) => {
+      newEvents.push({
+        id: item.id,
+        title: `🎂 ${item.nombre}`,
+        display: 'block',
+        start: `${item.cumpleanno?.fecha}`,
+        end: `${item.cumpleanno?.fecha}`,
+        backgroundColor: 'green',
+        color: '#FFF',
+        borderColor: 'green',
+        textColor: '#FFF',
+        extendedProps: {
+          apiData: item,
+        },
+      });
+    });
+
+    return newEvents;
   }
 
   handleFilters() {
@@ -115,16 +185,32 @@ export class CalendarizacionPage implements OnInit {
       }
     }
 
-    this._getEvents(this.currentFilters);
+    this._getEvents(this.currentFilters, [
+      {
+        tipo_evento: TypeEvents.ANNIVERSARIES,
+      },
+      {
+        tipo_evento: TypeEvents.BIRTHDAY,
+      },
+    ]);
   }
 
   handleResetFilters() {
     this.currentFilters = null;
     this.formFilters.reset();
-    this._getEvents(this.currentFilters);
+    this._getEvents(this.currentFilters, [
+      {
+        tipo_evento: TypeEvents.ANNIVERSARIES,
+      },
+      {
+        tipo_evento: TypeEvents.BIRTHDAY,
+      },
+    ]);
   }
 
-  createModal(event: IAPIResponseSesionComplete) {
+  createModal(event: IAPIResponseSesionComplete, resumen: boolean = false) {
+    this.currentEvent = event;
+
     if (event.estatus === 'ABIERTA') {
       this.openModal(event, 'votar');
 
@@ -132,8 +218,11 @@ export class CalendarizacionPage implements OnInit {
       this.openModal(event, 'sesion');
 
     } else if (event.estatus === 'CERRADA'){
-      this.openModal(event, 'sesion-activa');
-
+      if (resumen) {
+        this.openModal(event, 'sesion-resumen');
+      } else {
+        this.openModal(event, 'sesion');
+      }
     }
   }
 
@@ -148,8 +237,11 @@ export class CalendarizacionPage implements OnInit {
         },
       })
       .subscribe(({ data }) => {
+        console.log(data)
         if (data) {
-          console.log(data);
+          if (typeof(data.openModalResumen) !== 'undefined' && data.openModalResumen && this.currentEvent) {
+            this.createModal(this.currentEvent, true);
+          }
         }
       });
   }

@@ -6,7 +6,6 @@ export interface IApiUser {
   readonly email: string;
   readonly rut: string;
   readonly telefono: string;
-  readonly circunscripcion: string;
   readonly password: string;
   readonly confirm_password: string;
   readonly estado: boolean;
@@ -18,6 +17,7 @@ export interface IApiRequestUsers extends IApiUser {
   readonly bancada: number;
   readonly partido: number;
   readonly perfil: number;
+  readonly circunscripcion: number;
 }
 
 export interface IApiResponseUsers extends IApiUser {
@@ -27,6 +27,7 @@ export interface IApiResponseUsers extends IApiUser {
   readonly imagen?: string;
   readonly bancada: IApiResponseDetailKey;
   readonly partido: IApiResponseDetailKey;
+  readonly circunscripcion: IApiResponseDetailKey;
   readonly perfil: string;
   readonly equipos:any[] //TODO: VALIDAR
 }
@@ -40,6 +41,7 @@ export interface IApiResponseLogin {
   readonly perfil:number; //TODO: VALIDAR
   readonly partido_politico:IApiResponseDetailKey;
   readonly bancada:IApiResponseDetailKey;
+  readonly circunscripcion: IApiResponseDetailKey;
   readonly modulos:string[];
   readonly success:number;
   readonly first_time:boolean;
@@ -64,7 +66,7 @@ export interface IUserForm {
   email: FormControl<string>;
   rut: FormControl<string>;
   telefono: FormControl<string | null>;
-  circunscripcion: FormControl<string>;
+  circunscripcion: FormControl<number | null>;
   bancada: FormControl<number | null>;
   partido: FormControl<number | null>;
   perfil: FormControl<number | null>;
@@ -80,7 +82,7 @@ export interface IUserHomeForm {
   email: FormControl<string>;
   rut: FormControl<string>;
   telefono: FormControl<string | null>;
-  circunscripcion: FormControl<string>;
+  circunscripcion: FormControl<number | null>;
   bancada: FormControl<number | null>;
   partido: FormControl<number | null>;
   perfil: FormControl<number | null>;

@@ -1,0 +1,80 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="primary">
+            <ion-button (click)="closeModal()">
+                <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-no-padding modal-sesion-activa">
+    <ion-grid fixed class="px-3">
+        <ion-row class="ion-justify-content-center mb-4">
+            <ion-col size="12" class="title-modal text-center">
+                Sesión Resumen
+            </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+            <ion-col size="12" class="titulo-card">
+                Registros de Asistencia
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="text-center mt-3">
+            <ion-col size="6" class="asistencia-numero">
+                {{ summarySession?.datos_asistencia?.total_presentes ?? '-' }}
+            </ion-col>
+            <ion-col size="6" class="asistencia-numero">
+                {{ summarySession?.datos_asistencia?.total_ausentes ?? '-' }}
+            </ion-col>
+            <ion-col size="6" class="asistencia-tipo">
+                Presentes
+            </ion-col>
+            <ion-col size="6" class="asistencia-tipo">
+                Ausentes
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="text-center mt-3">
+            <ion-col size="12" class="ion-no-padding">
+                <ion-card class="card-list mb-4">
+                    <ion-card-content class="ion-no-padding">
+                        <ion-row>
+                            <ion-col size="6" class="titulo-card">
+                                Consejero
+                            </ion-col>
+                            <ion-col size="6" class="titulo-card">
+                                Asistencia
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="my-3">
+            <ion-col size-xs="12">
+                <table-attendance [dataSet]="attendanceRecord"></table-attendance>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="my-3">
+            <ion-col size-xs="12">
+                <table-votes [dataSet]="voteData"></table-votes>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+<!-- <ion-footer>
+    <ion-row class="ion-justify-content-center ion-align-items-center px-3 py-2 ion-text-end">
+        <ion-col size="12">
+            <ion-button class="btn-verde" [disabled]="true" (click)="saveData()">
+                Guardar
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-footer> -->

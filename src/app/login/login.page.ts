@@ -71,7 +71,7 @@ export class LoginPage implements OnInit {
           return false;
         }
 
-        if (data.perfil !== 2) {
+        if (data.perfil !== 3) {
           this.alertsService.openSnackBar('¡Solo pueden Iniciar Sesión los Usuarios Consejeros!', 'error');
           return false;
         }

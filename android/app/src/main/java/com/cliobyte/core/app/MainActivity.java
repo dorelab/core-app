@@ -1,4 +1,4 @@
-package com.example.app;
+package com.cliobyte.core.app;
 
 import com.getcapacitor.BridgeActivity;
 

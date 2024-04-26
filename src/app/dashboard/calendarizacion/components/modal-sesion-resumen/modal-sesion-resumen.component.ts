@@ -3,12 +3,12 @@ import { AdministrationService, IAPIResponseSesion, IAPISummarySession, IApiResp
 import { ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-modal-sesion-activa',
-  templateUrl: './modal-sesion-activa.component.html',
-  styleUrls: ['./modal-sesion-activa.component.scss'],
+  selector: 'app-modal-sesion-resumen',
+  templateUrl: './modal-sesion-resumen.component.html',
+  styleUrls: ['./modal-sesion-resumen.component.scss'],
 })
 
-export class ModalSesionActivaComponent implements OnInit {
+export class ModalSesionResumenComponent implements OnInit {
   public sessionID: number | null = null;
   public userLogin: IApiResponseUserID | null = null;
   public sessionData: IAPIResponseSesion | null = null;

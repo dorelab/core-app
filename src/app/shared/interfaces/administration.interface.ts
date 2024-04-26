@@ -64,12 +64,18 @@ export interface IApiResponseConvocatoria {
   readonly fecha: string;
   readonly sesion: IApiResponseTeams;
   readonly equipos: IApiResponseEquipos[];
+  readonly documento_pdf: string;
 }
 
 export interface IApiResponseEquipos {
   readonly id: number;
   readonly nombre: string;
   readonly tipo: string;
+}
+
+export interface IApiResponseCircunscripciones {
+  readonly id: number;
+  readonly nombre: string;
 }
 
 /*export interface IApiResponseSesion {

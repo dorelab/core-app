@@ -5,7 +5,7 @@ import {
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AdministrationService, AuthService, CustomValidations, emailPattern, FALLBACK, getLocalStorageUser, IApiFilterParties, IApiResponseBenches, IApiResponseParties, IApiResponseTypeProfile, IApiResponseUserID, IUserHomeForm, numbersPattern, PageResultModel, rutRegexPattern } from '@app/shared';
+import { AdministrationService, AuthService, CustomValidations, emailPattern, FALLBACK, getLocalStorageUser, IApiFilterParties, IApiResponseBenches, IApiResponseCircunscripciones, IApiResponseParties, IApiResponseTypeProfile, IApiResponseUserID, IUserHomeForm, numbersPattern, PageResultModel, rutRegexPattern } from '@app/shared';
 import * as moment from 'moment';
 import { forkJoin } from 'rxjs';
 
@@ -26,6 +26,7 @@ export class MisDatosPage implements OnInit {
   public previewImage: string | undefined = '';
   public bancadasList: IApiResponseBenches[] = [];
   public partidosList: IApiResponseParties[] = [];
+  public circunscripcionList: IApiResponseCircunscripciones[] = [];
   public typeProfilesList: IApiResponseTypeProfile[] = [];
   public fallback = FALLBACK;
   public fileName: string | null = null;
@@ -63,10 +64,12 @@ export class MisDatosPage implements OnInit {
     forkJoin([
       this._authService.getProfiles(),
       this._administrationService.getBenchesList(),
+      this._administrationService.getCircunscripcionList(),
     ]).subscribe({
-      next: ([profiles, benches]) => {
+      next: ([profiles, benches, circunscripciones]) => {
         this.typeProfilesList = profiles;
         this.bancadasList = benches;
+        this.circunscripcionList = circunscripciones;
 
         if (this.userLogin) {
           const profileID = this.typeProfilesList.find(
@@ -95,6 +98,7 @@ export class MisDatosPage implements OnInit {
         ...this.userLogin,
         bancada: this.userLogin.bancada.id,
         partido: this.userLogin.partido.id,
+        circunscripcion: this.userLogin.circunscripcion.id,
         perfil: null,
       });
 
@@ -124,7 +128,7 @@ export class MisDatosPage implements OnInit {
         telefono: this._fb.control(null, {
           validators: [Validators.pattern(numbersPattern)],
         }),
-        circunscripcion: this._fb.control('', {
+        circunscripcion: this._fb.control(null, {
           validators: [Validators.required],
         }),
         bancada: this._fb.control(null, { validators: [Validators.required] }),

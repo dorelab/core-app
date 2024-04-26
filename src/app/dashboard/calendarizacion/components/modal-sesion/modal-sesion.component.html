@@ -6,17 +6,17 @@
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
+    <ion-grid fixed class="px-3">
+        <ion-row class="ion-justify-content-center mb-3">
+            <ion-col size="12" class="title-modal text-center pt-0">
+                {{ title }}
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-header>
 
 <ion-content class="ion-no-padding modal-sesion">
     <ion-grid fixed class="px-3">
-        <ion-row class="ion-justify-content-center mb-4">
-            <ion-col size="12" class="title-modal text-center">
-                Sesión
-            </ion-col>
-        </ion-row>
-
-
         <ion-row>
             <ion-col size="12" class="titulo-card">
                 Sesión
@@ -77,31 +77,25 @@
             </ion-col>
 
             <ion-col size="12" class="text-center">
-                <ion-button color="secondary" class="btn-modal-sesion">
-                    Ingresar a la Sesión
-                </ion-button>
-            </ion-col>
-
-            <ion-col size="12" class="text-center">
-                <ion-button color="secondary" class="btn-modal-sesion" [disabled]="true">
-                    Resumen Sesión
-                </ion-button>
-            </ion-col>
-
-            <ion-col size="12" class="text-center">
-                <ion-button color="primary" class="btn-modal-sesion">
+                <ion-button color="primary" class="btn-modal-sesion" (click)="handlePdf()">
                     Visualizar Tabla
+                </ion-button>
+            </ion-col>
+
+            <ion-col size="12" class="text-center" *ngIf="sessionData?.estatus === 'CERRADA'">
+                <ion-button color="primary" class="btn-modal-sesion" (click)="openModalResumen()">
+                    Resumen de Sesión
                 </ion-button>
             </ion-col>
         </ion-row>
 
-        <ion-row class="mt-5">
+        <ion-row class="mt-5" *ngIf="sessionData?.estatus === 'CREADA'">
             <ion-col size="12" class="h5 mb-0">
                 Convocatoria
             </ion-col>
         </ion-row>
 
-        <ion-row class="my-3">
+        <ion-row class="my-3" *ngIf="sessionData?.estatus === 'CREADA'">
             <ion-col size-xs="12">
                 <table-votes [dataSet]="voteData"></table-votes>
             </ion-col>

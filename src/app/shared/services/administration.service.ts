@@ -1,7 +1,7 @@
 import { Observable, map } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { IAPIFilterSession, IApiFilterCommon, IApiFilterParties, IApiResponseCommittessList } from '../interfaces';
+import { IAPIFilterSession, IApiFilterCommon, IApiFilterParties, IApiResponseCircunscripciones, IApiResponseCommittessList } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +38,10 @@ export class AdministrationService {
 
   getIniciativaById(id: number): Observable<any> {
     return this.apiService.get(`${this.path}/iniciativa/${id}`);
+  }
+
+  getCircunscripcionList(): Observable<any> {
+    return this.apiService.get(`auth/usuario/circunscripciones/`);
   }
 
   transformCommittees(data: any): any {
