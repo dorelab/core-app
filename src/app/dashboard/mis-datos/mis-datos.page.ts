@@ -73,7 +73,7 @@ export class MisDatosPage implements OnInit {
 
         if (this.userLogin) {
           const profileID = this.typeProfilesList.find(
-            (i) => i.nombre == this.userLogin?.perfil
+            (i) => i.nombre == this.userLogin?.nombre_perfil
           )?.id;
 
           this.formControls.perfil.patchValue(profileID ?? null);

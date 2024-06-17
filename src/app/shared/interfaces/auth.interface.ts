@@ -23,7 +23,7 @@ export interface UserLoginModel {
   nombre: string;
   apellido: string;
   is_superuser: boolean;
-  perfil: number;
+  perfil: PerfilLoginModel;
   perfil_nombre: string;
   modulos: any[];
   msj: string;
@@ -31,6 +31,11 @@ export interface UserLoginModel {
   success: number;
   first_time: boolean;
   last_login: Date;
+}
+
+export interface PerfilLoginModel {
+  id_perfil: number;
+  nombre_perfil: string;
 }
 
 export interface IApiResponseUserID{
@@ -43,7 +48,9 @@ export interface IApiResponseUserID{
   readonly circunscripcion: IApiResponseDetailKey;
   readonly bancada:         IApiResponseDetailKey;
   readonly imagen:          string;
-  readonly perfil:          'ADMINISTRADOR' | 'CONSEJERO';
+  readonly perfil:          number;
+  readonly nombre_perfil:   'ADMINISTRADOR/A' | 'CONSEJERO/A' | 'PRESIDENTE/A DEL CONSEJO';
+  readonly id_perfil:       number;
   readonly estado:          boolean;
   readonly is_active:       boolean;
   readonly is_staff:        boolean;

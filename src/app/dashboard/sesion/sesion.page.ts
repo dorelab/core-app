@@ -52,9 +52,8 @@ export class SesionPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('sesion');
     this._getUsers({
-      perfil: '2'
+      perfil: '3'
     })
   }
 
@@ -90,14 +89,14 @@ export class SesionPage implements OnInit {
 
   handleFilter(query:string){
     this._getUsers({
-      perfil: '2',
+      perfil: '3',
       nombre__contains: query
     })
   }
 
   handleClearFilter(){
     this._getUsers({
-      perfil:'2'
+      perfil: '3'
     })
   }
 
