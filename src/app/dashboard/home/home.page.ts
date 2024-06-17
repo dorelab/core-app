@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getLocalStorageUser } from '../../shared/helpers/auth.helpers';
-import { ItemMenu, MAIN_MENU } from '@app/shared';
+import { ItemMenu, LINKS, LinksModel, MAIN_MENU } from '@app/shared';
 
 @Component({
   selector: 'app-home',
@@ -10,12 +10,7 @@ import { ItemMenu, MAIN_MENU } from '@app/shared';
 export class HomePage implements OnInit {
   infoUser: any;
   botones: ItemMenu[] = MAIN_MENU;
-  logos: string[] = [
-    'logo-home1.png',
-    'logo-home2.jpg',
-    'logo-home3.png',
-    'logo-home4.png'
-  ];
+  logos: LinksModel[] = LINKS;
 
   constructor() {
     this.infoUser = JSON.parse(getLocalStorageUser() || '');

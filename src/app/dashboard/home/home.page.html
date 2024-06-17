@@ -25,14 +25,16 @@
         <ion-row>
             <ion-col size="12" class="px-2">
                 <div class="w-100 p-3 ratio ratio-16x9 content-video mx-auto my-5">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Qf_7mEPMIAc" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Iyd2hzoxzzg?si=HoGftF03N779pYXc" allowfullscreen></iframe>
                 </div>
             </ion-col>
         </ion-row>
 
         <ion-row>
             <ion-col size="12" class="my-2 px-5" *ngFor="let logo of logos">
-                <img class="img-logo-home w-100" [src]="'../../assets/images/home/' + logo" />
+                <a [href]="logo.link" target="_blank">
+                    <img class="img-logo-home w-100" [src]="logo.urlImage" />
+                </a>
             </ion-col>
         </ion-row>
     </ion-grid>
