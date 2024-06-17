@@ -72,7 +72,7 @@ export class LoginPage implements OnInit {
         }
 
         if (data.perfil.id_perfil !== 3) {
-          this.alertsService.openSnackBar('¡Solo pueden Iniciar Sesión los Usuarios Consejeros!', 'error');
+          this.alertsService.openSnackBar('¡Solo pueden Iniciar Sesión los Usuarios Consejeros/as!', 'error');
           return false;
         }
         console.log(data.imagen);
