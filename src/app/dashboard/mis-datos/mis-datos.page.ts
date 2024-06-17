@@ -98,7 +98,7 @@ export class MisDatosPage implements OnInit {
         ...this.userLogin,
         bancada: this.userLogin.bancada.id,
         partido: this.userLogin.partido.id,
-        circunscripcion: this.userLogin.circunscripcion.id,
+        circunscripcion: this.userLogin.circunscripcion ? this.userLogin.circunscripcion.id : null,
         perfil: null,
       });
 
