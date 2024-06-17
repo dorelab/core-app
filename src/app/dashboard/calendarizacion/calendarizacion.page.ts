@@ -137,12 +137,16 @@ export class CalendarizacionPage implements OnInit {
     const newEvents: UIEventCalendar<EventsModelsResponse>[] = [];
 
     anniversaries.forEach((item) => {
+      const date = item.efemeride?.fecha_anual
+        ? item.efemeride?.fecha_anual
+        : item.efemeride?.fecha;
+
       newEvents.push({
         id: item.id,
         title: `${item.nombre}`,
         display: 'block',
-        start: `${item.efemeride?.fecha}`,
-        end: `${item.efemeride?.fecha}`,
+        start: `${date}`,
+        end: `${date}`,
         backgroundColor: 'green',
         color: '#FFF',
         borderColor: 'green',
@@ -154,12 +158,16 @@ export class CalendarizacionPage implements OnInit {
     });
 
     birthdays.forEach((item) => {
+      const date = item.cumpleanno?.fecha_anual
+        ? item.cumpleanno?.fecha_anual
+        : item.cumpleanno?.fecha;
+
       newEvents.push({
         id: item.id,
         title: `🎂 ${item.nombre}`,
         display: 'block',
-        start: `${item.cumpleanno?.fecha}`,
-        end: `${item.cumpleanno?.fecha}`,
+        start: `${date}`,
+        end: `${date}`,
         backgroundColor: 'green',
         color: '#FFF',
         borderColor: 'green',

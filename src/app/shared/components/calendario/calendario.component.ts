@@ -27,6 +27,11 @@ export class CalendarioComponent {
   @Output() onSelectEvent = new EventEmitter<IAPIResponseSesionComplete>();
 
   public options: CalendarOptions;
+  public legendCalendar = [
+    { text: 'Sesión Activa', color: '#3788d8' },
+    { text: 'Sesión Cerrada', color: '#1D8882' },
+    { text: 'Sesión Resumen', color: '#F28A28' },
+  ];
 
   constructor(private breakpointObserver: BreakpointObserver) {
     const self = this;

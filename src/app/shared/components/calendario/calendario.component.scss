@@ -1,3 +1,14 @@
+.circle-legend {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.text-legend {
+    font-size: 12px;
+}
+
 ::ng-deep .calendario-full {
     .fc-toolbar.fc-header-toolbar {
         display: inline !important;

@@ -1,1 +1,10 @@
+<ion-grid>
+    <ion-row>
+        <ion-col size="auto" class="d-flex align-items-center pe-3" *ngFor="let item of legendCalendar;">
+            <div class="circle-legend" [style]="'background-color: '+ item.color + ';'"></div>
+            <span class="text-legend">{{ item.text }}</span>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
 <full-calendar class="calendario-full" [options]="options" [deepChangeDetection]="true"></full-calendar>

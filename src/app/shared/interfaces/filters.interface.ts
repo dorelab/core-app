@@ -59,6 +59,7 @@ export interface Efemeride {
   readonly nombre: string;
   readonly descripcion: string;
   readonly fecha: string;
+  readonly fecha_anual?:string;
 }
 
 export interface Cumpleanno {
@@ -66,4 +67,6 @@ export interface Cumpleanno {
   readonly nombre: string;
   readonly descripcion: string;
   readonly fecha: string;
+  readonly fecha_anual?:string;
+
 }
