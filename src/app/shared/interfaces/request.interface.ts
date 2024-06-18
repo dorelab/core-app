@@ -58,7 +58,7 @@ export interface RequestForm {
   fecha_limite: FormControl<string>;
   consejero: FormControl<number | null>;
   sesion: FormControl<number | null>;
-  archivo_: FormControl<string>;
+  archivo: FormControl<any>;
 }
 
 export interface ResponseRequestForm {
@@ -81,4 +81,12 @@ export interface RequestFilters {
   fecha_inicio?: string|null;
   fecha_termino?: string|null;
   fecha_solicitud?: Date|null;
+}
+
+export interface IBodyModel {
+  file?: File | null;
+  name?: string | null;
+  additionalParams?: {
+    [key: PropertyKey]: any;
+  };
 }

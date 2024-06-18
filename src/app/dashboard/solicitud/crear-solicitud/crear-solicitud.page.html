@@ -47,7 +47,7 @@
                     <div class="my-3 w-100">
                         <ion-text class="w-100 d-block">{{ fileName }}</ion-text>
 
-                        <input #fileUpload hidden type="file" class="file-input" name="files[]" (change)="changeFile($event)">
+                        <input accept=".pdf" #fileUpload hidden type="file" class="file-input" name="files[]" (change)="changeFile($event)">
 
                         <ion-button color="primary" (click)="fileUpload.click()">
                             Cargar Archivo

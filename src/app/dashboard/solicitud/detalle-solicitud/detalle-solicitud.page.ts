@@ -69,7 +69,7 @@ export class DetalleSolicitudPage implements OnInit {
   }
 
   openFile(response: boolean = false) {
-    const urlRequest = `${this._env.urlFiles}${(response ? this.dataResponseRequest.archivo : this.dataRequest.archivo)}`;
+    const urlRequest = `${this._env.urlFiles}media/${(response ? this.dataResponseRequest.archivo : this.dataRequest.archivo)}`;
     window.open(urlRequest);
   }
 }

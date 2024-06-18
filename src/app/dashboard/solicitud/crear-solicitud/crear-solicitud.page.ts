@@ -4,6 +4,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
 import { AdministrationService, DefinitionsModel, ISesionModel, PageResultModel, RequestForm, RequestService, SesionService, UserLoginModel, getLocalStorageUser } from '@app/shared';
 import * as moment from 'moment';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-crear-solicitud',
@@ -71,7 +72,7 @@ export class CrearSolicitudPage implements OnInit {
         fecha_solicitud: this._fb.control('', { validators: [Validators.required]}),
         fecha_limite: this._fb.control('', { validators: [Validators.required]}),
         consejero: this._fb.control(this.infoUser.usuario_id, { validators: [Validators.required]}),
-        archivo_: this._fb.control('', { validators: [Validators.required]}),
+        archivo: this._fb.control('', { validators: [Validators.required]}),
       }
     );
   }
@@ -99,11 +100,38 @@ export class CrearSolicitudPage implements OnInit {
       ? archivo.originFileObj
       : archivo;*/
 
-    this._RequestService.saveRequest(dataResponse).subscribe({
+    /*this._RequestService.saveRequest(dataResponse).subscribe({
       complete: () => {
         this.isShowResult = true;
       },
-    });
+    });*/
+
+    const { archivo } = this.formRequest.getRawValue();
+    const fileAux = archivo.originFileObj
+      ? archivo.originFileObj
+      : archivo;
+
+    this._RequestService
+      .uploadDocs({
+        file: fileAux[0],
+        name: 'documento',
+        additionalParams:{
+          descripcion: fileAux.name
+        }
+      })
+      .pipe(
+        switchMap((file) =>
+          this._RequestService.saveRequest({
+            ...dataResponse,
+            archivo: file.id,
+          })
+        )
+      )
+      .subscribe({
+        complete: () => {
+          this.isShowResult = true;
+        },
+      });
   }
 
   handlePageResultEvent(){
@@ -121,6 +149,8 @@ export class CrearSolicitudPage implements OnInit {
   changeFile(event: any) {
     const files = event.target.files;
 
+    this.formControls.archivo.patchValue(files);
+    
     if (files.length === 0) {
         return;
     }
@@ -129,10 +159,10 @@ export class CrearSolicitudPage implements OnInit {
       let reader = new FileReader();
       this.fileName = file.name.split('/').pop().split('\\').pop();
 
-      reader.readAsDataURL(file);
+      /*reader.readAsDataURL(file);
       reader.onload = () => {
-        this.formControls.archivo_.patchValue((reader.result as string));
-      };
+        this.formControls.archivo.patchValue((reader.result as string));
+      };*/
     }
   }
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Sesion } from '../_class';
 import { Observable } from 'rxjs';
-import { IRequestModel, RequestFilters } from '../interfaces';
+import { IAPIDocs, IBodyModel, IRequestModel, RequestFilters } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +33,15 @@ export class RequestService {
 
   saveRequest(data: any): Observable<any> {
     return this.apiService.post(`${this.path}/solicitud/`, data);
+  }
+
+  uploadDocs(body: IBodyModel): Observable<IAPIDocs> {
+    const url = `${this.path}/documento/`;
+    return this.apiService.upLoadFile(
+      'POST',
+      url,
+      body,
+      'Error al subir el documento'
+    );
   }
 }
