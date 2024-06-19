@@ -198,6 +198,7 @@ export class MisDatosPage implements OnInit {
 
   reload() {
     this.isShowResult = false;
-    this._router.navigate(['/dashboard/home/']);
+    window.location.href = '/dashboard/home/';
+    //this._router.navigate(['/dashboard/home/']);
   }
 }
