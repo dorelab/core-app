@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { IRequestModel, RequestService, TableData, UserLoginModel, getLocalStorageUser } from '@app/shared';
 import * as moment from 'moment';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -14,12 +15,14 @@ export class ListadoSolicitudPage implements OnInit {
   public RequestList: IRequestModel[] = [];
   public RequestFinishedList: IRequestModel[] = [];
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     this.infoUser = JSON.parse(getLocalStorageUser() || '');
   }
 
   ngOnInit() {
-    this.getListRequest({filters: {consejero__id: this.infoUser.usuario_id}, loadListFinish: true});
+    this.route.paramMap.subscribe( params => {
+      this.getListRequest({filters: {consejero__id: this.infoUser.usuario_id}, loadListFinish: true});
+    });
   }
 
   getListRequest(event: any) {
