@@ -85,7 +85,7 @@ export class HeaderComponent implements OnInit {
   }
 
   notificationValidation() {
-    timer(0, 600000)
+    timer(0, 300000)
       .pipe(
         takeUntil(this.unsubscribe$),
         switchMap((_) =>

@@ -58,7 +58,8 @@
 }
 
 ::ng-deep .mat-mdc-menu-panel.mat-mdc-menu-panel.menuAlerts {
-    max-width: 350px;
+    max-width: 320px;
+    min-width: 300px;
     .header-alerts {
         font-family: "Mulish-Black";
     }

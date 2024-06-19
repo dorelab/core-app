@@ -7,7 +7,7 @@
         </ion-buttons>
 
         <ion-buttons slot="end">
-            <ion-button mat-button [matMenuTriggerFor]="menuNotifications" class="notificacion">
+            <ion-button mat-button [matMenuTriggerFor]="menuNotifications" class="notificacion" (menuOpened)="getAlertsList()">
                 <ion-badge color="primary" *ngIf="countAlerts > 0"></ion-badge>
                 <ion-icon name="notifications"></ion-icon>
             </ion-button>
@@ -45,7 +45,7 @@
 </mat-menu>
 
 <!-- NOTIFICACIONES USUARIO -->
-<mat-menu #menuNotifications="matMenu" class="menuAlerts" xPosition="before">
+<mat-menu #menuNotifications="matMenu" class="menuAlerts" xPosition="before" yPosition="below">
     <ion-grid>
         <ion-row class="mb-2">
             <ion-col size="6" class="header-alerts">
