@@ -3,7 +3,7 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as LoginActions from './login.actions';
-import { AlertListService, AlertsService, AuthService } from '@app/shared';
+import { AlertListService, AlertsService, AuthService, NotificationsService } from '@app/shared';
 import * as LoginReducer from './login.reducer';
 import * as LoginSelectors from './login.selectors';
 import { Store } from '@ngrx/store';
@@ -136,6 +136,6 @@ export class LoginEffects {
     private authService: AuthService,
     public alertsService: AlertsService,
     private _alertListService: AlertListService,
-    private store: Store<LoginReducer.State>,
+    private store: Store<LoginReducer.State>
   ) {}
 }

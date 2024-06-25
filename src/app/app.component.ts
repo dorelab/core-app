@@ -25,11 +25,13 @@ export class AppComponent {
       private alertCtrl: AlertController,
       public alertsService: AlertsService,
       public snackBar: MatSnackBar,
-      @Optional() private routerOutlet?: IonRouterOutlet
+      @Optional() private routerOutlet?: IonRouterOutlet,
     ) {
       this.platform.ready().then(() => {
         this.exitAppOnDoubleTap();
         // this.exitAppOnAlert();
+      }).catch(e => {
+        console.log('ERROR: ', e);
       });
     }
 

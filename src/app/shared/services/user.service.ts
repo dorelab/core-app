@@ -12,11 +12,10 @@ import { IApiFilterCommon } from '../interfaces';
   providedIn: 'root',
 })
 export class UserService {
-  private path = 'auth';
+  private path = 'usuario';
 
   constructor(
     private apiService: ApiService,
   ) {}
-
 
 }

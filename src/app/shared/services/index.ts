@@ -9,3 +9,5 @@ export * from './sesion.service';
 export * from './request.service';
 export * from './alert-list.service';
 export * from './scheduling.service';
+export * from './notifications.service';
+export * from './storage.service';

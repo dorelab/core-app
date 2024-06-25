@@ -4,7 +4,7 @@ import { Observable, map } from 'rxjs';
 import { ApiService } from './api.service';
 import { getToken, removeUserToken } from '../helpers/auth.helpers';
 import { Router } from '@angular/router';
-import { ChangePasswordModel, PasswordRecoverModel, IApiFilterCommon } from '../interfaces';
+import { ChangePasswordModel, PasswordRecoverModel, IApiFilterCommon, UserLoginModel } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -77,5 +77,9 @@ export class AuthService {
       body,
       'Error al editar el usuario, intente nuevamente o contacte al administrador del sistema.'
     );
+  }
+
+  updateTokenUser(idUser: number, data: any): Observable<any>{
+    return this.ApiService.put(`${this.prefijoRuta}/update_token/${idUser}/`, data);
   }
 }

@@ -1,4 +1,7 @@
-apply plugin: 'com.android.application'
+plugins {
+  id("com.android.application")
+  id("com.google.gms.google-services")
+}
 
 android {
     namespace "com.cliobyte.core.app"
@@ -40,6 +43,13 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
+
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation 'androidx.work:work-runtime:2.7.0'
+    implementation 'com.google.firebase:firebase-messaging-directboot:23.1.2'
 }
 
 apply from: 'capacitor.build.gradle'
