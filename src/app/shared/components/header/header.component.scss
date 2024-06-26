@@ -15,6 +15,7 @@
         margin-inline-end: 0;
     }
     ion-toolbar {
+        --padding-top: var(--ion-safe-area-top);
         --background: transparent;
         ion-button {
             width: auto !important;
