@@ -17,48 +17,48 @@
 
                 <ion-col size="12" class="ion-padding-vertical">
                     <ion-label position="stacked" class="text-uppercase">Nombre Completo*</ion-label>
-                    <ion-input type="text" formControlName="nombre" fill="outline"></ion-input>
+                    <ion-input type="text" formControlName="nombre" fill="outline" mode="md"></ion-input>
                 </ion-col>
 
                 <ion-col size="12" class="ion-padding-vertical">
                     <ion-label position="stacked" class="text-uppercase">E-Mail*</ion-label>
-                    <ion-input type="email" formControlName="email" fill="outline"></ion-input>
+                    <ion-input type="email" formControlName="email" fill="outline" mode="md"></ion-input>
                 </ion-col>
 
                 <ion-col size="12" class="ion-padding-vertical">
                     <ion-label position="stacked" class="text-uppercase">RUT*</ion-label>
-                    <ion-input type="email" formControlName="rut" fill="outline"></ion-input>
+                    <ion-input type="email" formControlName="rut" fill="outline" mode="md"></ion-input>
                 </ion-col>
 
                 <ion-col size="12" class="ion-padding-vertical">
                     <ion-label position="stacked" class="text-uppercase">Teléfono Contacto*</ion-label>
-                    <ion-input type="email" formControlName="telefono" fill="outline"></ion-input>
+                    <ion-input type="email" formControlName="telefono" fill="outline" mode="md"></ion-input>
                 </ion-col>
 
                 <ion-col size="12" class="ion-padding-vertical">
                     <ion-label position="stacked" class="text-uppercase">Circunscripción*</ion-label>
-                    <ion-select formControlName="circunscripcion" label-placement="stacked" fill="outline">
+                    <ion-select formControlName="circunscripcion" label-placement="stacked" fill="outline" mode="md">
                         <ion-select-option *ngFor="let item of circunscripcionList" [value]="item.id">{{ item.nombre }}</ion-select-option>
                     </ion-select>
                 </ion-col>
 
                 <ion-col size="12" class="ion-padding-vertical">
                     <ion-label position="stacked" class="text-uppercase">Bancada*</ion-label>
-                    <ion-select formControlName="bancada" label-placement="stacked" fill="outline">
+                    <ion-select formControlName="bancada" label-placement="stacked" fill="outline" mode="md">
                         <ion-select-option *ngFor="let item of bancadasList" [value]="item.id">{{ item.nombre }}</ion-select-option>
                     </ion-select>
                 </ion-col>
 
                 <ion-col size="12" class="ion-padding-vertical">
                     <ion-label position="stacked" class="text-uppercase">Partido*</ion-label>
-                    <ion-select formControlName="partido" label-placement="stacked" fill="outline">
+                    <ion-select formControlName="partido" label-placement="stacked" fill="outline" mode="md">
                         <ion-select-option *ngFor="let item of partidosList" [value]="item.id">{{ item.nombre }}</ion-select-option>
                     </ion-select>
                 </ion-col>
 
                 <ion-col size="12" class="ion-padding-vertical">
                     <ion-label position="stacked" class="text-uppercase">Perfil Usuario/a*</ion-label>
-                    <ion-select formControlName="perfil" label-placement="stacked" fill="outline">
+                    <ion-select formControlName="perfil" label-placement="stacked" fill="outline" mode="md">
                         <ion-select-option *ngFor="let item of typeProfilesList" [value]="item.id">{{ item.nombre }}</ion-select-option>
                     </ion-select>
                 </ion-col>

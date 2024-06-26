@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { StorageService } from './storage.service';
 import { UserLoginModel } from '../interfaces';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 export const FCM_TOKEN = 'push_notification_token';
 
@@ -14,6 +15,7 @@ export const FCM_TOKEN = 'push_notification_token';
 export class NotificationsService {
   private _redirect = new BehaviorSubject<any>(null);
   private _authService: AuthService = inject(AuthService);
+  private _router: Router = inject(Router);
 
   get redirect() {
     return this._redirect.asObservable();
@@ -117,7 +119,8 @@ export class NotificationsService {
         const data = notification.notification.data;
         //console.log('Action performed: ' + JSON.stringify(notification.notification));
         //console.log('push data: ', data);
-        if(data?.redirect) this._redirect.next(data?.redirect);
+        //if(data?.redirect) this._redirect.next(data?.redirect);
+        this._router.navigate(['/dashboard/alertas']);
       }
     );
   }

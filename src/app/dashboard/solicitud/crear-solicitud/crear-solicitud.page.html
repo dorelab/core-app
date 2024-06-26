@@ -32,7 +32,7 @@
 
                 <ion-col size="12" class="px-2 mb-3">
                     <ion-label position="stacked">Tipo de Solicitud</ion-label>
-                    <ion-select formControlName="tipo" label-placement="stacked" fill="outline">
+                    <ion-select formControlName="tipo" label-placement="stacked" fill="outline" mode="md">
                         <ion-select-option *ngFor="let item of listaSolicitudes" [value]="item.id">{{ item.nombre }}</ion-select-option>
                     </ion-select>
                 </ion-col>

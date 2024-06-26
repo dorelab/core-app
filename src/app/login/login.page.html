@@ -20,7 +20,7 @@
                         <ion-row class="row-form ion-justify-content-center ion-align-items-center">
                             <ion-col size="12" class="ion-padding">
                                 <ion-label position="stacked">Correo</ion-label>
-                                <ion-input formControlName="email" type="email" fill="outline"></ion-input>
+                                <ion-input formControlName="email" type="email" fill="outline" mode="md"></ion-input>
                                 <ion-text color="danger" class="form-error" *ngIf="formData.controls['email'].value && formData.controls['email'].invalid && (formData.controls['email'].touched || formData.controls['email'].errors)">
                                     E-mail Invalido
                                 </ion-text>
@@ -28,7 +28,7 @@
 
                             <ion-col size="12" class="ion-padding">
                                 <ion-label position="stacked">Password</ion-label>
-                                <ion-input type="password" formControlName="password" (keydown.enter)="login()" fill="outline"></ion-input>
+                                <ion-input type="password" formControlName="password" (keydown.enter)="login()" fill="outline" mode="md"></ion-input>
                                 <ion-text color="danger" class="form-error" *ngIf="formData.controls['password'].value && formData.controls['password'].invalid && (formData.controls['password'].touched || formData.controls['password'].errors)">
                                     Ingrese el Password
                                 </ion-text>
