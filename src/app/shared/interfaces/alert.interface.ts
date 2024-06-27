@@ -9,6 +9,7 @@ export interface AlertModel {
   readonly visto: boolean;
   readonly estado: boolean;
   readonly usuario: number;
+  link: string | null;
 }
 
 export interface AlertFiltersForm {

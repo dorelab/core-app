@@ -55,11 +55,20 @@ export class AlertasPage implements OnInit {
       next:(alerts)=>{
         alerts.map((alert: AlertModel) => {
           alert.fecha_format = moment(alert.fecha).format('DD/MM/YYYY hh:mm:ss a');
+          alert.link = this.getLinkAlert(alert.tipo);
         });
 
         this.alertsList = alerts;
       }
     })
+  }
+
+  getLinkAlert(tipo: string) {
+    if (tipo === 'NUEVA SESIÓN AGENDADA' || tipo === 'NUEVA INFORMACIÓN DE PROYECTO') {
+      return '/dashboard/calendarizacion/';
+    }
+
+    return null;
   }
 
   onRemoveAlert(row: AlertModel) {

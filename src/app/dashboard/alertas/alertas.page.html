@@ -53,8 +53,9 @@
                             <ion-col size="12" class="titulo-solicitud">
                                 Descripción
                             </ion-col>
-                            <ion-col size="12" class="detalle-solicitud">
-                                {{ alert.descripcion }}
+                            <ion-col size="12" class="detalle-solicitud" style="flex-direction: column;">
+                                <a class="w-100" [routerLink]="!alert.link ? null : (alert.link)">{{ alert.descripcion }}</a>
+                                <span class="w-100 fw-light text-reset mt-3" style="font-size: 12px;" *ngIf="alert.link === null">*Ingrese desde un computador para conocer más detalles.</span>
                             </ion-col>
                         </ion-row>
 
